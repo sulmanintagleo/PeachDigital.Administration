@@ -21,21 +21,6 @@ namespace PeachDigital.Administration.Controllers
             return View();
         }
 
-        //// GET: FilmReleaseRules/Details/5
-        //public ActionResult Details(long? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    FilmReleaseRule filmReleaseRule = db.FilmReleaseRules.Find(id);
-        //    if (filmReleaseRule == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    return View(filmReleaseRule);
-        //}
-
         // GET: FilmReleaseRules/Create
         public ActionResult Create()
         {
@@ -62,8 +47,6 @@ namespace PeachDigital.Administration.Controllers
         }
 
         // POST: FilmReleaseRules/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "CircuitId,FilmReleaseTypeId,OpeningDate,DateOfFirstSession,DateOfLastSession,IsScheduled,ComingSoon,ComingSoonAttribute,ComingSoonByCinema")] FilmReleaseRule filmReleaseRule)
@@ -130,7 +113,7 @@ namespace PeachDigital.Administration.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CircuitId = new SelectList(db.Circuits.Where(c=>c.isActive), "Id", "Name", filmReleaseRule.CircuitId);
+            ViewBag.CircuitList = new SelectList(db.Circuits.Where(c=>c.isActive), "Id", "Name", filmReleaseRule.CircuitId);
             ViewBag.IsScheduled = new SelectList(
             new List<SelectListItem>
             {
