@@ -32,13 +32,11 @@
         <AssociationConnector Association="PeachDigitalAdministrationModel.FK__Circuits__HeadOf__68A8708A" />
         <AssociationConnector Association="PeachDigitalAdministrationModel.FK__Circuits__MapPoi__5C0D8F7B" />
         <AssociationConnector Association="PeachDigitalAdministrationModel.FK_FilmReleaseRules_Circuits" />
-        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.Provider" Width="1.5" PointX="13.375" PointY="11" />
-        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.ProviderConfiguration" Width="1.5" PointX="15.625" PointY="8.25" />
-        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.ProviderValueMetaData" Width="1.5" PointX="17.875" PointY="12.5" />
-        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.ProviderValue" Width="1.5" PointX="15.625" PointY="11.375" />
+        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.Provider" Width="1.5" PointX="15.625" PointY="6.875" />
+        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.ProviderValue" Width="1.5" PointX="14.125" PointY="9.75" />
         <AssociationConnector Association="PeachDigitalAdministrationModel.FK_CircuitProvider_Providers" />
-        <AssociationConnector Association="PeachDigitalAdministrationModel.FK_ProviderConfiguration_Providers" />
-        <AssociationConnector Association="PeachDigitalAdministrationModel.FK_ProviderValueMetaData_ProviderValues" />
+        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.Mode" Width="1.5" PointX="13" PointY="6.75" />
+        <AssociationConnector Association="PeachDigitalAdministrationModel.FK_CircuitProvider_Mode" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

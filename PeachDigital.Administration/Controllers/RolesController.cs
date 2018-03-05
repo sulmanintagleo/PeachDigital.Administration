@@ -22,23 +22,6 @@ namespace PeachDigital.Administration.Controllers
             return View();
         }
 
-        // GET: Roles/Details/5
-        [AuthorizeUser("Roles", "View")]
-        public ActionResult Details(string EncId)
-        {
-            if (string.IsNullOrEmpty(EncId))
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            int roleId = Convert.ToInt32(CryptoProvider.Decrypt(EncId));
-            Role role = db.Roles.Find(roleId);
-            if (role == null)
-            {
-                return HttpNotFound();
-            }
-            return View(role);
-        }
-
         // GET: Roles/Create
         [AuthorizeUser("Roles", "Create")]
         public ActionResult Create()
@@ -249,7 +232,7 @@ namespace PeachDigital.Administration.Controllers
                 return Json(new { recordsFiltered = totalResultsCount, data = res.ToList(), recordsTotal = totalResultsCount }, JsonRequestBehavior.AllowGet);
             }
 
-            return Json(new { recordsFiltered = totalResultsCount, data = result.ToList(), recordsTotal = totalResultsCount }, JsonRequestBehavior.AllowGet);
+            return Json(new { recordsFiltered = totalResultsCount, data = "", recordsTotal = totalResultsCount }, JsonRequestBehavior.AllowGet);
         }
 
         public List<Role> GetAllRoleData(int take, int skip, out int totalResultsCount)
@@ -271,10 +254,7 @@ namespace PeachDigital.Administration.Controllers
                     var res = result.Skip(skip).Take(take).ToList();
                     return res;
                 }
-                else
-                {
-                    totalResultsCount = 0;
-                }
+                
                 totalResultsCount = 0;
                 return null;
             }

@@ -14,12 +14,6 @@ namespace PeachDigital.Administration.Models
     
     public partial class ProviderValue
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ProviderValue()
-        {
-            this.ProviderValueMetaDatas = new HashSet<ProviderValueMetaData>();
-        }
-    
         public long Id { get; set; }
         public int ProviderId { get; set; }
         public int ModeId { get; set; }
@@ -38,7 +32,6 @@ namespace PeachDigital.Administration.Models
         public Nullable<int> ClubId { get; set; }
     
         public virtual Provider Provider { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProviderValueMetaData> ProviderValueMetaDatas { get; set; }
+        public virtual Mode Mode { get; set; }
     }
 }

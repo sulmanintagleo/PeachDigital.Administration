@@ -23,24 +23,6 @@ namespace PeachDigital.Administration.Controllers
             return View();
         }
 
-        // GET: Users/Details/5
-        [AuthorizeUser("Users", "View")]
-        public ActionResult Details(string EncId)
-        {
-            if (string.IsNullOrEmpty(EncId))
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            int userId = Convert.ToInt32(CryptoProvider.Decrypt(EncId));
-            User user = db.Users.Find(userId);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            user.Password = CustomeEncryptDecrypt.Decrypt(user.Password,true);
-            return View(user);
-        }
-
         // GET: Users/Create
         [AuthorizeUser("Users", "Create")]
         public ActionResult Create()
@@ -245,7 +227,7 @@ namespace PeachDigital.Administration.Controllers
                 return Json(new { recordsFiltered = totalResultsCount, data = res.ToList(), recordsTotal = totalResultsCount }, JsonRequestBehavior.AllowGet);
             }
 
-            return Json(new { recordsFiltered = totalResultsCount, data = result.ToList(), recordsTotal = totalResultsCount }, JsonRequestBehavior.AllowGet);
+            return Json(new { recordsFiltered = totalResultsCount, data = "", recordsTotal = totalResultsCount }, JsonRequestBehavior.AllowGet);
         }
 
         public List<User> GetAllUsersData(int take, int skip, out int totalResultsCount)
@@ -285,10 +267,7 @@ namespace PeachDigital.Administration.Controllers
                     var res = result.Skip(skip).Take(take).ToList();
                     return res;
                 }
-                else
-                {
-                    totalResultsCount = 0;
-                }
+                
                 totalResultsCount = 0;
                 return null;
             }

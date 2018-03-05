@@ -22,23 +22,6 @@ namespace PeachDigital.Administration.Controllers
             return View();
         }
 
-        // GET: Modules/Details/5
-        [AuthorizeUser("Modules", "View")]
-        public ActionResult Details(string EncId)
-        {
-            if (string.IsNullOrEmpty(EncId))
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            int moduleId = Convert.ToInt32(CryptoProvider.Decrypt(EncId));
-            Module module = db.Modules.Find(moduleId);
-            if (module == null)
-            {
-                return HttpNotFound();
-            }
-            return View(module);
-        }
-
         // GET: Modules/Create
         [AuthorizeUser("Modules", "Create")]
         public ActionResult Create()
@@ -173,7 +156,7 @@ namespace PeachDigital.Administration.Controllers
                 return Json(new { recordsFiltered = totalResultsCount, data = res.ToList(), recordsTotal = totalResultsCount }, JsonRequestBehavior.AllowGet);
             }
 
-            return Json(new { recordsFiltered = totalResultsCount, data = result.ToList(), recordsTotal = totalResultsCount }, JsonRequestBehavior.AllowGet);
+            return Json(new { recordsFiltered = totalResultsCount, data = "", recordsTotal = totalResultsCount }, JsonRequestBehavior.AllowGet);
         }
 
         public List<Module> GetAllModuleData(int take, int skip, out int totalResultsCount)
@@ -195,10 +178,7 @@ namespace PeachDigital.Administration.Controllers
                     var res = result.Skip(skip).Take(take).ToList();
                     return res;
                 }
-                else
-                {
-                    totalResultsCount = 0;
-                }
+                
                 totalResultsCount = 0;
                 return null;
             }

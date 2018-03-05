@@ -126,6 +126,13 @@
           <Property Name="Lat" Type="nvarchar(max)" Nullable="false" />
           <Property Name="Long" Type="nvarchar(max)" Nullable="false" />
         </EntityType>
+        <EntityType Name="Mode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ModeName" Type="char" MaxLength="10" Nullable="false" />
+        </EntityType>
         <EntityType Name="ModulePermissions">
           <Key>
             <PropertyRef Name="Id" />
@@ -157,27 +164,6 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="VersionNumber" Type="char" MaxLength="10" />
-        </EntityType>
-        <EntityType Name="ProviderConfiguration">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ProviderId" Type="int" />
-          <Property Name="Action" Type="varchar" MaxLength="100" />
-          <Property Name="UrlAction" Type="varchar" MaxLength="200" />
-          <Property Name="Format" Type="varchar" MaxLength="50" />
-          <Property Name="Method" Type="char" MaxLength="10" />
-        </EntityType>
-        <EntityType Name="ProviderValueMetaData">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ProviderValueId" Type="bigint" Nullable="false" />
-          <Property Name="KeyProvider" Type="varchar" MaxLength="100" />
-          <Property Name="ValueProvider" Type="varchar" MaxLength="100" />
-          <Property Name="ModeId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ProviderValues">
           <Key>
@@ -366,6 +352,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CircuitProvider_Mode">
+          <End Role="Mode" Type="Self.Mode" Multiplicity="1" />
+          <End Role="ProviderValues" Type="Self.ProviderValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Mode">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProviderValues">
+              <PropertyRef Name="ModeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CircuitProvider_Providers">
           <End Role="Provider" Type="Self.Provider" Multiplicity="1" />
           <End Role="ProviderValues" Type="Self.ProviderValues" Multiplicity="*" />
@@ -387,30 +385,6 @@
             </Principal>
             <Dependent Role="FilmReleaseRules">
               <PropertyRef Name="CircuitId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProviderConfiguration_Providers">
-          <End Role="Provider" Type="Self.Provider" Multiplicity="0..1" />
-          <End Role="ProviderConfiguration" Type="Self.ProviderConfiguration" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Provider">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProviderConfiguration">
-              <PropertyRef Name="ProviderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProviderValueMetaData_ProviderValues">
-          <End Role="ProviderValues" Type="Self.ProviderValues" Multiplicity="1" />
-          <End Role="ProviderValueMetaData" Type="Self.ProviderValueMetaData" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProviderValues">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProviderValueMetaData">
-              <PropertyRef Name="ProviderValueId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -463,12 +437,11 @@
           <EntitySet Name="FilmReleaseRules" EntityType="Self.FilmReleaseRules" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HeadOffices" EntityType="Self.HeadOffices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MapPoints" EntityType="Self.MapPoints" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Mode" EntityType="Self.Mode" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ModulePermissions" EntityType="Self.ModulePermissions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Modules" EntityType="Self.Modules" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PermissionType" EntityType="Self.PermissionType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Provider" EntityType="Self.Provider" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ProviderConfiguration" EntityType="Self.ProviderConfiguration" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="ProviderValueMetaData" EntityType="Self.ProviderValueMetaData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ProviderValues" EntityType="Self.ProviderValues" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Regions" EntityType="Self.Regions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
@@ -517,6 +490,10 @@
             <End Role="Regions" EntitySet="Regions" />
             <End Role="Cinemas" EntitySet="Cinemas" />
           </AssociationSet>
+          <AssociationSet Name="FK_CircuitProvider_Mode" Association="Self.FK_CircuitProvider_Mode">
+            <End Role="Mode" EntitySet="Mode" />
+            <End Role="ProviderValues" EntitySet="ProviderValues" />
+          </AssociationSet>
           <AssociationSet Name="FK_CircuitProvider_Providers" Association="Self.FK_CircuitProvider_Providers">
             <End Role="Provider" EntitySet="Provider" />
             <End Role="ProviderValues" EntitySet="ProviderValues" />
@@ -525,15 +502,7 @@
             <End Role="Circuits" EntitySet="Circuits" />
             <End Role="FilmReleaseRules" EntitySet="FilmReleaseRules" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProviderConfiguration_Providers" Association="Self.FK_ProviderConfiguration_Providers">
-            <End Role="Provider" EntitySet="Provider" />
-            <End Role="ProviderConfiguration" EntitySet="ProviderConfiguration" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProviderValueMetaData_ProviderValues" Association="Self.FK_ProviderValueMetaData_ProviderValues">
-            <End Role="ProviderValues" EntitySet="ProviderValues" />
-            <End Role="ProviderValueMetaData" EntitySet="ProviderValueMetaData" />
-          </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
@@ -674,20 +643,15 @@
             <Parameter Name="OrderTimeoutSeconds" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="Providers" EntityType="PeachDigitalAdministrationModel.Provider" />
-          <EntitySet Name="ProviderConfigurations" EntityType="PeachDigitalAdministrationModel.ProviderConfiguration" />
-          <EntitySet Name="ProviderValueMetaDatas" EntityType="PeachDigitalAdministrationModel.ProviderValueMetaData" />
           <EntitySet Name="ProviderValues" EntityType="PeachDigitalAdministrationModel.ProviderValue" />
           <AssociationSet Name="FK_CircuitProvider_Providers" Association="PeachDigitalAdministrationModel.FK_CircuitProvider_Providers">
             <End Role="Provider" EntitySet="Providers" />
             <End Role="ProviderValue" EntitySet="ProviderValues" />
           </AssociationSet>
-          <AssociationSet Name="FK_ProviderConfiguration_Providers" Association="PeachDigitalAdministrationModel.FK_ProviderConfiguration_Providers">
-            <End Role="Provider" EntitySet="Providers" />
-            <End Role="ProviderConfiguration" EntitySet="ProviderConfigurations" />
-          </AssociationSet>
-          <AssociationSet Name="FK_ProviderValueMetaData_ProviderValues" Association="PeachDigitalAdministrationModel.FK_ProviderValueMetaData_ProviderValues">
+          <EntitySet Name="Modes" EntityType="PeachDigitalAdministrationModel.Mode" />
+          <AssociationSet Name="FK_CircuitProvider_Mode" Association="PeachDigitalAdministrationModel.FK_CircuitProvider_Mode">
+            <End Role="Mode" EntitySet="Modes" />
             <End Role="ProviderValue" EntitySet="ProviderValues" />
-            <End Role="ProviderValueMetaData" EntitySet="ProviderValueMetaDatas" />
           </AssociationSet>
           </EntityContainer>
         <EntityType Name="User">
@@ -1013,30 +977,6 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="VersionNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
           <NavigationProperty Name="ProviderValues" Relationship="PeachDigitalAdministrationModel.FK_CircuitProvider_Providers" FromRole="Provider" ToRole="ProviderValue" />
-          <NavigationProperty Name="ProviderConfigurations" Relationship="PeachDigitalAdministrationModel.FK_ProviderConfiguration_Providers" FromRole="Provider" ToRole="ProviderConfiguration" />
-        </EntityType>
-        <EntityType Name="ProviderConfiguration">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProviderId" Type="Int32" />
-          <Property Name="Action" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="UrlAction" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Format" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Method" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-          <NavigationProperty Name="Provider" Relationship="PeachDigitalAdministrationModel.FK_ProviderConfiguration_Providers" FromRole="ProviderConfiguration" ToRole="Provider" />
-        </EntityType>
-        <EntityType Name="ProviderValueMetaData">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ProviderValueId" Type="Int64" Nullable="false" />
-          <Property Name="KeyProvider" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ValueProvider" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="ModeId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="ProviderValue" Relationship="PeachDigitalAdministrationModel.FK_ProviderValueMetaData_ProviderValues" FromRole="ProviderValueMetaData" ToRole="ProviderValue" />
         </EntityType>
         <EntityType Name="ProviderValue">
           <Key>
@@ -1059,7 +999,7 @@
           <Property Name="TemplatePrintStream" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="ClubId" Type="Int32" />
           <NavigationProperty Name="Provider" Relationship="PeachDigitalAdministrationModel.FK_CircuitProvider_Providers" FromRole="ProviderValue" ToRole="Provider" />
-          <NavigationProperty Name="ProviderValueMetaDatas" Relationship="PeachDigitalAdministrationModel.FK_ProviderValueMetaData_ProviderValues" FromRole="ProviderValue" ToRole="ProviderValueMetaData" />
+          <NavigationProperty Name="Mode" Relationship="PeachDigitalAdministrationModel.FK_CircuitProvider_Mode" FromRole="ProviderValue" ToRole="Mode" />
         </EntityType>
         <Association Name="FK_CircuitProvider_Providers">
           <End Type="PeachDigitalAdministrationModel.Provider" Role="Provider" Multiplicity="1" />
@@ -1073,27 +1013,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_ProviderConfiguration_Providers">
-          <End Type="PeachDigitalAdministrationModel.Provider" Role="Provider" Multiplicity="0..1" />
-          <End Type="PeachDigitalAdministrationModel.ProviderConfiguration" Role="ProviderConfiguration" Multiplicity="*" />
+        <EntityType Name="Mode">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ModeName" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="ProviderValues" Relationship="PeachDigitalAdministrationModel.FK_CircuitProvider_Mode" FromRole="Mode" ToRole="ProviderValue" />
+        </EntityType>
+        <Association Name="FK_CircuitProvider_Mode">
+          <End Type="PeachDigitalAdministrationModel.Mode" Role="Mode" Multiplicity="1" />
+          <End Type="PeachDigitalAdministrationModel.ProviderValue" Role="ProviderValue" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Provider">
+            <Principal Role="Mode">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="ProviderConfiguration">
-              <PropertyRef Name="ProviderId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ProviderValueMetaData_ProviderValues">
-          <End Type="PeachDigitalAdministrationModel.ProviderValue" Role="ProviderValue" Multiplicity="1" />
-          <End Type="PeachDigitalAdministrationModel.ProviderValueMetaData" Role="ProviderValueMetaData" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ProviderValue">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ProviderValueMetaData">
-              <PropertyRef Name="ProviderValueId" />
+            <Dependent Role="ProviderValue">
+              <PropertyRef Name="ModeId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1305,29 +1241,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ProviderConfigurations">
-            <EntityTypeMapping TypeName="PeachDigitalAdministrationModel.ProviderConfiguration">
-              <MappingFragment StoreEntitySet="ProviderConfiguration">
-                <ScalarProperty Name="Method" ColumnName="Method" />
-                <ScalarProperty Name="Format" ColumnName="Format" />
-                <ScalarProperty Name="UrlAction" ColumnName="UrlAction" />
-                <ScalarProperty Name="Action" ColumnName="Action" />
-                <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="ProviderValueMetaDatas">
-            <EntityTypeMapping TypeName="PeachDigitalAdministrationModel.ProviderValueMetaData">
-              <MappingFragment StoreEntitySet="ProviderValueMetaData">
-                <ScalarProperty Name="ModeId" ColumnName="ModeId" />
-                <ScalarProperty Name="ValueProvider" ColumnName="ValueProvider" />
-                <ScalarProperty Name="KeyProvider" ColumnName="KeyProvider" />
-                <ScalarProperty Name="ProviderValueId" ColumnName="ProviderValueId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ProviderValues">
             <EntityTypeMapping TypeName="PeachDigitalAdministrationModel.ProviderValue">
               <MappingFragment StoreEntitySet="ProviderValues">
@@ -1346,6 +1259,14 @@
                 <ScalarProperty Name="CircuitId" ColumnName="CircuitId" />
                 <ScalarProperty Name="ModeId" ColumnName="ModeId" />
                 <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modes">
+            <EntityTypeMapping TypeName="PeachDigitalAdministrationModel.Mode">
+              <MappingFragment StoreEntitySet="Mode">
+                <ScalarProperty Name="ModeName" ColumnName="ModeName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

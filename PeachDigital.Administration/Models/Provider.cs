@@ -18,7 +18,6 @@ namespace PeachDigital.Administration.Models
         public Provider()
         {
             this.ProviderValues = new HashSet<ProviderValue>();
-            this.ProviderConfigurations = new HashSet<ProviderConfiguration>();
         }
     
         public int Id { get; set; }
@@ -27,7 +26,5 @@ namespace PeachDigital.Administration.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ProviderValue> ProviderValues { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProviderConfiguration> ProviderConfigurations { get; set; }
     }
 }

@@ -23,23 +23,6 @@ namespace PeachDigital.Administration.Controllers
             return View();
         }
 
-        // GET: Cinemas/Details/5
-        [AuthorizeUser("Cinema", "View")]
-        public ActionResult Details(string EncId)
-        {
-            if (string.IsNullOrEmpty(EncId))
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Int64 cinemaId = Convert.ToInt64(CryptoProvider.Decrypt(EncId));
-            Cinema cinema = db.Cinemas.Find(cinemaId);
-            if (cinema == null)
-            {
-                return HttpNotFound();
-            }
-            return View(cinema);
-        }
-
         // GET: Cinemas/Create
         [AuthorizeUser("Cinema", "Create")]
         public ActionResult Create()

@@ -232,6 +232,9 @@
     <Compile Include="Models\MapPoint.cs">
       <DependentUpon>PeachAdministration.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Mode.cs">
+      <DependentUpon>PeachAdministration.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Module.cs">
       <DependentUpon>PeachAdministration.tt</DependentUpon>
     </Compile>
@@ -259,13 +262,7 @@
     <Compile Include="Models\Provider.cs">
       <DependentUpon>PeachAdministration.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ProviderConfiguration.cs">
-      <DependentUpon>PeachAdministration.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\ProviderValue.cs">
-      <DependentUpon>PeachAdministration.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ProviderValueMetaData.cs">
       <DependentUpon>PeachAdministration.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Region.cs">

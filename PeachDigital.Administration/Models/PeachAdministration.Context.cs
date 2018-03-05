@@ -43,9 +43,8 @@ namespace PeachDigital.Administration.Models
         public virtual DbSet<MapPoint> MapPoints { get; set; }
         public virtual DbSet<Circuit> Circuits { get; set; }
         public virtual DbSet<Provider> Providers { get; set; }
-        public virtual DbSet<ProviderConfiguration> ProviderConfigurations { get; set; }
-        public virtual DbSet<ProviderValueMetaData> ProviderValueMetaDatas { get; set; }
         public virtual DbSet<ProviderValue> ProviderValues { get; set; }
+        public virtual DbSet<Mode> Modes { get; set; }
     
         public virtual int UpdateCinema(Nullable<long> oldCinemaId, Nullable<long> newCinemaId, string name, string timezone, Nullable<bool> open, Nullable<bool> booking, Nullable<bool> @public, Nullable<bool> threeDSecure, Nullable<int> order, string managerName, string managerDesc, string external_Id, Nullable<long> bookingSystemID, Nullable<long> regionId, Nullable<long> circuit_Id, Nullable<int> dayStart, Nullable<bool> giftStore, string secondExternal_Id, Nullable<bool> isPaymentWithGiftCardEnabled, Nullable<bool> isLoyaltyEarnPointsEnabled, string ticketingUrl)
         {

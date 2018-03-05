@@ -5,114 +5,84 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Payment Providers</li>
+    </ol>
+</nav>
+<h2>
+    Payment Providers
+    <a href="/ProviderValues/Create" class="btn btn-orange"><span class="fa fa-plus-circle"></span>add Providers</a>
+</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ModeId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CircuitId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CinemaId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProviderSetUpName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ServiceName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ProviderUrl)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Password)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ClientID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.WorkStationCode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ClientClass)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.PerformPayment)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TemplatePrintStream)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ClubId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Provider.Name)
-        </th>
-        <th></th>
-    </tr>
+<div class="row main-content">
+    <div class="col-sm-12">
+        <div class="table-responsive tbl-pagination">
+            <table class="table table-general" id="tblPaymentProviders">
+                <thead>
+                    <tr>
+                        <th>Mode</th>
+                        <th>Circuit</th>
+                        <th>Cinema</th>
+                        <th>Provider Setup Name</th>
+                        <th>Service Name</th>
+                        <th>Provider Url</th>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Client Id</th>
+                        <th>Work Station Code</th>
+                        <th>Client Class</th>
+                        <th>Perform Payment</th>
+                        <th>Template Print Stream</th>
+                        <th>Club Id</th>
+                        <th>Provider Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModeId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CircuitId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CinemaId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProviderSetUpName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ServiceName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ProviderUrl)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Password)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ClientID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.WorkStationCode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ClientClass)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PerformPayment)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TemplatePrintStream)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ClubId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Provider.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
+@section Scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#tblPaymentProviders').DataTable({
+                "proccessing": true,
+                "serverSide": true,
+                "bFilter":false,
+                "pagingType": "simple_numbers",
+                "sAjaxSource": "/ProviderValues/GetProvidersByPaging/",
+                "columns": [
+                    { "data": "Mode" },
+                    { "data": "Circuit" },
+                    { "data": "Cinema" },
+                    { "data": "ProviderSetUpName" },
+                    { "data": "ServiceName" },
+                    { "data": "ProviderUrl" },
+                    { "data": "Username" },
+                    { "data": "Password" },
+                    { "data": "ClientId" },
+                    { "data": "WorkStationCode" },
+                    { "data": "ClientClass" },
+                    { "data": "PerformPayment" },
+                    { "data": "TemplatePrintStream" },
+                    { "data": "ClubId" },
+                    { "data": "ProviderName" },
+                    { "data": "Actions"}
+                ]
+            });
+
+            $(".table-responsive.tbl-pagination").find('*').removeClass("row");
+            $("table").parent().removeAttr("class");
+            $(".table-responsive.tbl-pagination").find('*').removeClass("col-sm-6");
+
+        });
+
+    </script>
+
 }
-
-</table>
