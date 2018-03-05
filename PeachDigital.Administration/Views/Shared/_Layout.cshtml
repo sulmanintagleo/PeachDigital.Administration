@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Peach Digital Dashboard</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    @Styles.Render("~/Content/css")
+    @RenderSection("Styles", required: false)
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <header class="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-1 col-xs-2">
+                    <div class="logo">
+                        <img src="~/images/logo.jpg" alt="Peach Digital Logo" />
+                    </div>
+                </div>
+                <div class="search">
+                    <input type="text" class="show-desktop form-control" placeholder="Search roles, users, modules, role permissions ...." />
+                    <input type="text" class="show-mobile form-control" placeholder="Search ...." />
+                </div>
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="logout-area">
+                    <ul>
+                        <li class="user">Alexander Wills <img class="img-circle" src="~/images/admin.jpg" alt="Admin Image" /></li>
+
+                        @if (Session["UserSession"] != null)
+                        {
+                            <li class="logout">@Html.ActionLink("Logout", "Logout", "Account")</li>
+                        }
+                        else
+                        {
+                            <li class="logout">@Html.ActionLink("Login", "Login", "Account")</li>
+                        }
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="main">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2">
+                    @Html.Partial("~/Views/Shared/Partials/_Header.cshtml")
+                </div>
+                <div class="col-sm-10">
+                    <section class="content-area">
+                        @RenderBody()
+                        @Html.Partial("~/Views/Shared/Partials/_Footer.cshtml")
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>*@
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            setTimeout(function () {
+                $('[data-toggle="tooltip"]').tooltip();
+            },500);
+        });
+
+        //session end
+        var sessionTimeoutWarning = @Session.Timeout - 1;
+        var sTimeout = parseInt(sessionTimeoutWarning) * 60 * 1000;
+        setTimeout('SessionEnd()', sTimeout);
+
+        function SessionEnd() {
+            //alert("Ok");
+            //window.location.hostname = "";
+            window.location = "/Account/Login/";
+        }
+
+        var pathname = window.location.pathname;
+        var pathArray = pathname.split("/");
+
+        if (pathArray.length > 0) {
+            $(".pdaMenu").removeClass("active");
+            if (pathArray[1] == "" || pathArray[1].toLowerCase() == "home") {
+                $(".pdaMenu.Dashboard").addClass("active");
+            }
+            else {
+                $(".pdaMenu." + pathArray[1] + "").addClass("active");
+            }
+
+        }
+    </script>
+
+</body>
+</html>

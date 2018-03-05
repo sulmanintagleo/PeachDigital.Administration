@@ -1,0 +1,89 @@
+﻿@model PeachDigital.Administration.Models.FilmReleaseRule
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>FilmReleaseRule</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OpeningDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OpeningDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfFirstSession)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfFirstSession)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfLastSession)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfLastSession)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsScheduled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsScheduled)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComingSoon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComingSoon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComingSoonAttribute)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComingSoonAttribute)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComingSoonByCinema)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComingSoonByCinema)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Circuit.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Circuit.Name)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

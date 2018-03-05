@@ -1,0 +1,86 @@
+﻿@model IEnumerable<PeachDigital.Administration.Models.Circuit>
+
+@{
+    ViewBag.Title = "PDA | Circuits";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Circuits</li>
+    </ol>
+</nav>
+<h2>
+    Circuit
+    <a href="/Circuits/Create" class="btn btn-orange"><span class="fa fa-plus-circle"></span>add Circuit</a>
+</h2>
+
+
+<div class="row main-content">
+    <div class="col-sm-12">
+        <div class="table-responsive tbl-pagination">
+            <table class="table table-general" id="tblCircuits">
+                @*<caption>
+                    <div class="search-add-new">
+                        <a href="/Circuits/Create" class="btn btn-orange"><span class="fa fa-plus-circle"></span>add Circuit</a>
+                    </div>
+                </caption>*@
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Name)</th>
+                        <th>Base Url</th>
+                        <th>Username</th>
+                        <th>@Html.DisplayNameFor(model => model.Password)</th>
+                        <th>@Html.DisplayNameFor(model => model.Open)</th>
+                        <th>@Html.DisplayNameFor(model => model.Public)</th>
+                        <th>Head Office</th>
+                        <th>Country</th>
+                        <th>Contact</th>
+                        <th>Map Point</th>
+                        <th>Use Loyalty</th>
+                        <th>Order Timeout Seconds</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#tblCircuits').DataTable({
+                "proccessing": true,
+                "serverSide": true,
+                "bFilter":false,
+                "pagingType": "simple_numbers",
+                "sAjaxSource": "/Circuits/GetCircuitsByPaging/",
+                "columns": [
+                    { "data": "Name"},
+                    { "data": "BaseURI"},
+                    { "data": "UserName"},
+                    { "data": "Password" },
+                    { "data": "Open" },
+                    { "data": "Public" },
+                    { "data": "HeadOffice" },
+                    { "data": "Country" },
+                    { "data": "Contact" },
+                    { "data": "MapPoint" },
+                    { "data": "UseLoyalty" },
+                    { "data": "OrderTimeoutSeconds" },
+                    { "data": "Actions" }
+                ]
+            });
+            $(".table-responsive.tbl-pagination").find('*').removeClass("row");
+            $("table").parent().removeAttr("class");
+            $(".table-responsive.tbl-pagination").find('*').removeClass("col-sm-6");
+        });
+
+    </script>
+
+}

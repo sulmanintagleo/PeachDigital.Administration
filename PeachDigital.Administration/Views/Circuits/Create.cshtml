@@ -1,0 +1,180 @@
+﻿@model PeachDigital.Administration.Models.Circuit
+
+@{
+    ViewBag.Title = "PDA | New Circuit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>
+    Circuit
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/Circuits">Circuits</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Add Circuit</li>
+        </ol>
+    </nav>
+</h2>
+
+
+<div class="row main-content">
+    <div class="col-sm-12">
+        <div class="form-area">
+            <h3>Add Circuit</h3>
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmNewCircuit" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                if (ViewBag.ErrorMessage != null)
+                {
+                    <p class="text-danger">@ViewBag.ErrorMessage</p>
+                }
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "" })
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Base Url</label>
+                            @Html.EditorFor(model => model.BaseURI, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.BaseURI, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Username</label>
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "" })
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type = "password" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Head Office</label>
+                            @Html.DropDownList("HeadOfficeID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.HeadOfficeID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Country</label>
+                            @Html.DropDownList("CountryID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Contact</label>
+                            @Html.DropDownList("ContactID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ContactID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Map Point</label>
+                            @Html.DropDownList("MapPointID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.MapPointID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Use Loyalty</label>
+                            @Html.DropDownList("UseLoyalty", null, htmlAttributes: new { @class = "form-control" })
+                            @*@Html.EditorFor(model => model.UseLoyalty)
+                                @Html.ValidationMessageFor(model => model.UseLoyalty, "", new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Order Timeout Seconds</label>
+                            @Html.EditorFor(model => model.OrderTimeoutSeconds, new { htmlAttributes = new { @class = "form-control", min = "0" } })
+                            @Html.ValidationMessageFor(model => model.OrderTimeoutSeconds, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <input type="checkbox" id="Public" class="custom-checkbox" name="Public" value="true" />
+                        @Html.LabelFor(model => model.Public, htmlAttributes: new { @class = "" })
+                        @*
+                            @Html.EditorFor(model => model.Public, null,new { @class="abc"})
+                            @Html.ValidationMessageFor(model => model.Public, "", new { @class = "text-danger" })*@
+
+                        <input type="checkbox" id="Open" class="custom-checkbox" name="Open" value="true" />
+                        @Html.LabelFor(model => model.Open, htmlAttributes: new { @class = "" })
+                        @*
+                            @Html.EditorFor(model => model.Open, null,new { @class="abc"})
+                            @Html.ValidationMessageFor(model => model.Open, "", new { @class = "text-danger" })*@
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="submit-btns">
+                            <button type="button" class="btn-cancel">Cancel</button>
+                            <button type="submit" class="btn-save">Save</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#frmNewCircuit').validate({
+                errorClass: 'help-block animation-slideDown',
+                errorElement: 'div',
+                errorPlacement: function (error, e) {
+                    e.parents('.form-group > div').append(error);
+                },
+                highlight: function (e) {
+                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block').remove();
+                },
+                success: function (e) {
+                    e.closest('.form-group').removeClass('has-success has-error');
+                    e.closest('.help-block').remove();
+                },
+                rules: {
+                    'Name': {
+                        required: true
+                    },
+                    'BaseURI': {
+                        required: true
+                    }
+                },
+                messages: {
+                    'Name': 'Name is required',
+                    'BaseURI': 'Base URI is required'
+                }
+            });
+
+            $('input[type=submit]').click(function () {
+                $(this).attr('disabled', 'disabled');
+                $(this).parents('form').submit();
+            });
+            $('.btn-cancel').click(function () {
+                window.location = "/Circuits";
+            });
+        });
+
+    </script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

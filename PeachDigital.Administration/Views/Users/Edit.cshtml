@@ -1,0 +1,180 @@
+﻿@model PeachDigital.Administration.Models.User
+@{
+    ViewBag.Title = "PDA | Update User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>
+    User
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/Users">Users</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit User</li>
+        </ol>
+    </nav>
+</h2>
+
+
+<div class="row main-content">
+    <div class="col-sm-12">
+        <div class="form-area">
+            <h3>Edit Module</h3>
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditUser" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                if (ViewBag.ErrorMessage != null)
+                {
+                    <p class="text-danger">@ViewBag.ErrorMessage</p>
+                }
+
+                @Html.HiddenFor(model => model.Id)
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="model.FirstName" class="">First Name</label>
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="model.LastName" class="">Last Name</label>
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "" })
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "" })
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", type = "password" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="model.PhoneNo" class="">Phone No</label>
+                            @Html.EditorFor(model => model.PhoneNo, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PhoneNo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="model.Address1" class="">Address 1</label>
+                            @Html.EditorFor(model => model.Address1, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="model.Address2" class="">Address 2</label>
+                            @Html.EditorFor(model => model.Address2, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Address2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.County, htmlAttributes: new { @class = "" })
+                            @Html.EditorFor(model => model.County, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.County, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="model.Zip" class="">Zip Code</label>
+                            @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="model.RoleId" class="">Role</label>
+                            @Html.DropDownList("RoleId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.RoleId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="submit-btns">
+                            <button type="button" class="btn-cancel">Cancel</button>
+                            <button type="submit" class="btn-save">Update</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#frmEditUser').validate({
+            errorClass: 'help-block animation-slideDown',
+            errorElement: 'div',
+            errorPlacement: function (error, e) {
+                e.parents('.form-group > div').append(error);
+            },
+            highlight: function (e) {
+                $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                $(e).closest('.help-block').remove();
+            },
+            success: function (e) {
+                e.closest('.form-group').removeClass('has-success has-error');
+                e.closest('.help-block').remove();
+            },
+            rules: {
+                'FirstName': {
+                    required: true
+                },
+                'LastName': {
+                    required: true
+                },
+                'Email': {
+                    required: true,
+                    email:true
+                },
+                'Password': {
+                    required: true,
+                    minlength: 6
+                },
+                'RoleId': {
+                    required: true
+                }
+            },
+            messages: {
+                'FirstName': 'Please enter first name',
+                'LastName': 'Please enter last name',
+                'Email': 'Please enter valid email address',
+                'Password': {
+                    required: 'Please provide a password',
+                    minlength: 'Your password must be at least 6 characters long'
+                },
+                'RoleId': 'Please select some role',
+            }
+        });
+        $('input[type=submit]').click(function () {
+            $(this).attr('disabled', 'disabled');
+            $(this).parents('form').submit();
+        });
+        $('.btn-cancel').click(function () {
+            window.location = "/Users";
+        });
+    });
+
+</script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

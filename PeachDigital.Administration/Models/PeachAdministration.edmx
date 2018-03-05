@@ -1,0 +1,1376 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PeachDigitalAdministrationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BookingSystems">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookingURI" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AllocatedSeating" Type="bit" Nullable="false" />
+          <Property Name="LoyaltyEnabled" Type="bit" Nullable="false" />
+          <Property Name="Concessions" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MobileTickets" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SoldOutPercentage" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CinemaId" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CinemaAddress">
+          <Key>
+            <PropertyRef Name="CinemaId" />
+          </Key>
+          <Property Name="CinemaId" Type="bigint" Nullable="false" />
+          <Property Name="Address1" Type="varchar" MaxLength="50" />
+          <Property Name="Address2" Type="varchar" MaxLength="50" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="State" Type="varchar" MaxLength="50" />
+          <Property Name="ZipCode" Type="varchar" MaxLength="10" />
+          <Property Name="GeoLocation" Type="varchar" MaxLength="50" />
+          <Property Name="ContactEmail" Type="varchar" MaxLength="50" />
+          <Property Name="ContactPhone" Type="varchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="Cinemas">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Timezone" Type="varchar(max)" Nullable="false" />
+          <Property Name="Open" Type="bit" Nullable="false" />
+          <Property Name="Booking" Type="bit" Nullable="false" />
+          <Property Name="Public" Type="bit" Nullable="false" />
+          <Property Name="ThreeDSecure" Type="bit" Nullable="false" />
+          <Property Name="Order" Type="int" Nullable="false" />
+          <Property Name="ManagerName" Type="nvarchar(max)" />
+          <Property Name="ManagerDesc" Type="nvarchar(max)" />
+          <Property Name="External_Id" Type="nvarchar(max)" />
+          <Property Name="BookingSystemID" Type="bigint" />
+          <Property Name="RegionId" Type="bigint" />
+          <Property Name="Circuit_Id" Type="bigint" />
+          <Property Name="DayStart" Type="int" Nullable="false" />
+          <Property Name="GiftStore" Type="bit" />
+          <Property Name="SecondExternal_Id" Type="varchar" MaxLength="100" />
+          <Property Name="IsPaymentWithGiftCardEnabled" Type="bit" Nullable="false" />
+          <Property Name="IsLoyaltyEarnPointsEnabled" Type="bit" Nullable="false" />
+          <Property Name="TicketingUrl" Type="varchar" MaxLength="265" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Circuits">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="BaseURI" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="200" />
+          <Property Name="Password" Type="varchar" MaxLength="200" />
+          <Property Name="Open" Type="bit" Nullable="false" />
+          <Property Name="Public" Type="bit" Nullable="false" />
+          <Property Name="HeadOfficeID" Type="bigint" Nullable="false" />
+          <Property Name="CountryID" Type="bigint" Nullable="false" />
+          <Property Name="ContactID" Type="bigint" Nullable="false" />
+          <Property Name="MapPointID" Type="bigint" Nullable="false" />
+          <Property Name="UseLoyalty" Type="bit" />
+          <Property Name="OrderTimeoutSeconds" Type="int" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Contacts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BookingLine" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Capital" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FilmReleaseRules">
+          <Key>
+            <PropertyRef Name="CircuitId" />
+            <PropertyRef Name="FilmReleaseTypeId" />
+          </Key>
+          <Property Name="CircuitId" Type="bigint" Nullable="false" />
+          <Property Name="FilmReleaseTypeId" Type="int" Nullable="false" />
+          <Property Name="OpeningDate" Type="int" />
+          <Property Name="DateOfFirstSession" Type="int" />
+          <Property Name="DateOfLastSession" Type="int" />
+          <Property Name="IsScheduled" Type="bit" />
+          <Property Name="ComingSoon" Type="bit" />
+          <Property Name="ComingSoonAttribute" Type="int" />
+          <Property Name="ComingSoonByCinema" Type="bit" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HeadOffices">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Postcode" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Country" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Timezone" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MapPoints">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Lat" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Long" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ModulePermissions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="ModuleId" Type="int" Nullable="false" />
+          <Property Name="PermissionId" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Modules">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PermissionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="VersionNumber" Type="char" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="ProviderConfiguration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProviderId" Type="int" />
+          <Property Name="Action" Type="varchar" MaxLength="100" />
+          <Property Name="UrlAction" Type="varchar" MaxLength="200" />
+          <Property Name="Format" Type="varchar" MaxLength="50" />
+          <Property Name="Method" Type="char" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="ProviderValueMetaData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProviderValueId" Type="bigint" Nullable="false" />
+          <Property Name="KeyProvider" Type="varchar" MaxLength="100" />
+          <Property Name="ValueProvider" Type="varchar" MaxLength="100" />
+          <Property Name="ModeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProviderValues">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProviderId" Type="int" Nullable="false" />
+          <Property Name="ModeId" Type="int" Nullable="false" />
+          <Property Name="CircuitId" Type="bigint" />
+          <Property Name="CinemaId" Type="bigint" />
+          <Property Name="ProviderSetUpName" Type="varchar" MaxLength="100" />
+          <Property Name="ServiceName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ProviderUrl" Type="varchar" MaxLength="200" />
+          <Property Name="UserName" Type="varchar" MaxLength="200" />
+          <Property Name="Password" Type="varchar" MaxLength="200" />
+          <Property Name="ClientID" Type="varchar" MaxLength="100" />
+          <Property Name="WorkStationCode" Type="varchar" MaxLength="50" />
+          <Property Name="ClientClass" Type="varchar" MaxLength="50" />
+          <Property Name="PerformPayment" Type="bit" Nullable="false" />
+          <Property Name="TemplatePrintStream" Type="varchar" MaxLength="100" />
+          <Property Name="ClubId" Type="int" />
+        </EntityType>
+        <EntityType Name="Regions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PhoneNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="50" />
+          <Property Name="County" Type="nvarchar" MaxLength="50" />
+          <Property Name="ZipCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Circuits__Contac__5B196B42">
+          <End Role="Contacts" Type="Self.Contacts" Multiplicity="1" />
+          <End Role="Circuits" Type="Self.Circuits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contacts">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Circuits">
+              <PropertyRef Name="ContactID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Circuits__Countr__5A254709">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+          <End Role="Circuits" Type="Self.Circuits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Circuits">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Circuits__HeadOf__68A8708A">
+          <End Role="HeadOffices" Type="Self.HeadOffices" Multiplicity="1" />
+          <End Role="Circuits" Type="Self.Circuits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HeadOffices">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Circuits">
+              <PropertyRef Name="HeadOfficeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Circuits__MapPoi__5C0D8F7B">
+          <End Role="MapPoints" Type="Self.MapPoints" Multiplicity="1" />
+          <End Role="Circuits" Type="Self.Circuits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MapPoints">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Circuits">
+              <PropertyRef Name="MapPointID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModulePer__Modul__707E9C7C">
+          <End Role="Modules" Type="Self.Modules" Multiplicity="1" />
+          <End Role="ModulePermissions" Type="Self.ModulePermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Modules">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModulePermissions">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModulePer__Permi__772B9A0B">
+          <End Role="PermissionType" Type="Self.PermissionType" Multiplicity="1" />
+          <End Role="ModulePermissions" Type="Self.ModulePermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PermissionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModulePermissions">
+              <PropertyRef Name="PermissionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModulePer__RoleI__6F8A7843">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="ModulePermissions" Type="Self.ModulePermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModulePermissions">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RoleId__6DA22FD1">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CinemaAddress_Cinemas">
+          <End Role="Cinemas" Type="Self.Cinemas" Multiplicity="1" />
+          <End Role="CinemaAddress" Type="Self.CinemaAddress" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Cinemas">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CinemaAddress">
+              <PropertyRef Name="CinemaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CinemaCircuit">
+          <End Role="Circuits" Type="Self.Circuits" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Cinemas" Type="Self.Cinemas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Circuits">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cinemas">
+              <PropertyRef Name="Circuit_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cinemas_Regions">
+          <End Role="Regions" Type="Self.Regions" Multiplicity="0..1" />
+          <End Role="Cinemas" Type="Self.Cinemas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Regions">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cinemas">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CircuitProvider_Providers">
+          <End Role="Provider" Type="Self.Provider" Multiplicity="1" />
+          <End Role="ProviderValues" Type="Self.ProviderValues" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProviderValues">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FilmReleaseRules_Circuits">
+          <End Role="Circuits" Type="Self.Circuits" Multiplicity="1" />
+          <End Role="FilmReleaseRules" Type="Self.FilmReleaseRules" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Circuits">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FilmReleaseRules">
+              <PropertyRef Name="CircuitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProviderConfiguration_Providers">
+          <End Role="Provider" Type="Self.Provider" Multiplicity="0..1" />
+          <End Role="ProviderConfiguration" Type="Self.ProviderConfiguration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProviderConfiguration">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProviderValueMetaData_ProviderValues">
+          <End Role="ProviderValues" Type="Self.ProviderValues" Multiplicity="1" />
+          <End Role="ProviderValueMetaData" Type="Self.ProviderValueMetaData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProviderValues">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProviderValueMetaData">
+              <PropertyRef Name="ProviderValueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="UpdateCinema" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="oldCinemaId" Type="bigint" Mode="In" />
+          <Parameter Name="newCinemaId" Type="bigint" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Timezone" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Open" Type="bit" Mode="In" />
+          <Parameter Name="Booking" Type="bit" Mode="In" />
+          <Parameter Name="Public" Type="bit" Mode="In" />
+          <Parameter Name="ThreeDSecure" Type="bit" Mode="In" />
+          <Parameter Name="Order" Type="int" Mode="In" />
+          <Parameter Name="ManagerName" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="ManagerDesc" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="External_Id" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="BookingSystemID" Type="bigint" Mode="In" />
+          <Parameter Name="RegionId" Type="bigint" Mode="In" />
+          <Parameter Name="Circuit_Id" Type="bigint" Mode="In" />
+          <Parameter Name="DayStart" Type="int" Mode="In" />
+          <Parameter Name="GiftStore" Type="bit" Mode="In" />
+          <Parameter Name="SecondExternal_Id" Type="varchar" Mode="In" />
+          <Parameter Name="IsPaymentWithGiftCardEnabled" Type="bit" Mode="In" />
+          <Parameter Name="IsLoyaltyEarnPointsEnabled" Type="bit" Mode="In" />
+          <Parameter Name="TicketingUrl" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateCircuit" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="oldCircuitId" Type="bigint" Mode="In" />
+          <Parameter Name="newCircuitId" Type="bigint" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="BaseURI" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="UserName" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="Open" Type="bit" Mode="In" />
+          <Parameter Name="Public" Type="bit" Mode="In" />
+          <Parameter Name="HeadOfficeID" Type="bigint" Mode="In" />
+          <Parameter Name="CountryID" Type="bigint" Mode="In" />
+          <Parameter Name="ContactID" Type="bigint" Mode="In" />
+          <Parameter Name="MapPointID" Type="bigint" Mode="In" />
+          <Parameter Name="UseLoyalty" Type="bit" Mode="In" />
+          <Parameter Name="OrderTimeoutSeconds" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="PeachDigitalAdministrationModelStoreContainer">
+          <EntitySet Name="BookingSystems" EntityType="Self.BookingSystems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CinemaAddress" EntityType="Self.CinemaAddress" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cinemas" EntityType="Self.Cinemas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Circuits" EntityType="Self.Circuits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FilmReleaseRules" EntityType="Self.FilmReleaseRules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HeadOffices" EntityType="Self.HeadOffices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MapPoints" EntityType="Self.MapPoints" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ModulePermissions" EntityType="Self.ModulePermissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Modules" EntityType="Self.Modules" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PermissionType" EntityType="Self.PermissionType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Provider" EntityType="Self.Provider" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProviderConfiguration" EntityType="Self.ProviderConfiguration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProviderValueMetaData" EntityType="Self.ProviderValueMetaData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProviderValues" EntityType="Self.ProviderValues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Regions" EntityType="Self.Regions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Circuits__Contac__5B196B42" Association="Self.FK__Circuits__Contac__5B196B42">
+            <End Role="Contacts" EntitySet="Contacts" />
+            <End Role="Circuits" EntitySet="Circuits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Circuits__Countr__5A254709" Association="Self.FK__Circuits__Countr__5A254709">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="Circuits" EntitySet="Circuits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Circuits__HeadOf__68A8708A" Association="Self.FK__Circuits__HeadOf__68A8708A">
+            <End Role="HeadOffices" EntitySet="HeadOffices" />
+            <End Role="Circuits" EntitySet="Circuits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Circuits__MapPoi__5C0D8F7B" Association="Self.FK__Circuits__MapPoi__5C0D8F7B">
+            <End Role="MapPoints" EntitySet="MapPoints" />
+            <End Role="Circuits" EntitySet="Circuits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModulePer__Modul__707E9C7C" Association="Self.FK__ModulePer__Modul__707E9C7C">
+            <End Role="Modules" EntitySet="Modules" />
+            <End Role="ModulePermissions" EntitySet="ModulePermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModulePer__Permi__772B9A0B" Association="Self.FK__ModulePer__Permi__772B9A0B">
+            <End Role="PermissionType" EntitySet="PermissionType" />
+            <End Role="ModulePermissions" EntitySet="ModulePermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModulePer__RoleI__6F8A7843" Association="Self.FK__ModulePer__RoleI__6F8A7843">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="ModulePermissions" EntitySet="ModulePermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RoleId__6DA22FD1" Association="Self.FK__Users__RoleId__6DA22FD1">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CinemaAddress_Cinemas" Association="Self.FK_CinemaAddress_Cinemas">
+            <End Role="Cinemas" EntitySet="Cinemas" />
+            <End Role="CinemaAddress" EntitySet="CinemaAddress" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CinemaCircuit" Association="Self.FK_CinemaCircuit">
+            <End Role="Circuits" EntitySet="Circuits" />
+            <End Role="Cinemas" EntitySet="Cinemas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cinemas_Regions" Association="Self.FK_Cinemas_Regions">
+            <End Role="Regions" EntitySet="Regions" />
+            <End Role="Cinemas" EntitySet="Cinemas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CircuitProvider_Providers" Association="Self.FK_CircuitProvider_Providers">
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="ProviderValues" EntitySet="ProviderValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilmReleaseRules_Circuits" Association="Self.FK_FilmReleaseRules_Circuits">
+            <End Role="Circuits" EntitySet="Circuits" />
+            <End Role="FilmReleaseRules" EntitySet="FilmReleaseRules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProviderConfiguration_Providers" Association="Self.FK_ProviderConfiguration_Providers">
+            <End Role="Provider" EntitySet="Provider" />
+            <End Role="ProviderConfiguration" EntitySet="ProviderConfiguration" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProviderValueMetaData_ProviderValues" Association="Self.FK_ProviderValueMetaData_ProviderValues">
+            <End Role="ProviderValues" EntitySet="ProviderValues" />
+            <End Role="ProviderValueMetaData" EntitySet="ProviderValueMetaData" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PeachDigitalAdministrationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="ModulePermission">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="ModuleId" Type="Int32" Nullable="false" />
+          <Property Name="PermissionId" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="PermissionType" Relationship="Self.FK__ModulePer__Permi__772B9A0B" FromRole="ModulePermissions" ToRole="PermissionType" />
+          <NavigationProperty Name="Module" Relationship="PeachDigitalAdministrationModel.FK__ModulePer__Modul__707E9C7C" FromRole="ModulePermission" ToRole="Module" />
+          <NavigationProperty Name="Role" Relationship="PeachDigitalAdministrationModel.FK__ModulePer__RoleI__6F8A7843" FromRole="ModulePermission" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="PermissionType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ModulePermissions" Relationship="Self.FK__ModulePer__Permi__772B9A0B" FromRole="PermissionType" ToRole="ModulePermissions" />
+        </EntityType>
+        <Association Name="FK__ModulePer__Permi__772B9A0B">
+          <End Role="PermissionType" Type="Self.PermissionType" Multiplicity="1" />
+          <End Role="ModulePermissions" Type="Self.ModulePermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PermissionType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModulePermissions">
+              <PropertyRef Name="PermissionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PeachAdministrationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ModulePermissions" EntityType="Self.ModulePermission" />
+          <EntitySet Name="PermissionTypes" EntityType="Self.PermissionType" />
+          <AssociationSet Name="FK__ModulePer__Permi__772B9A0B" Association="Self.FK__ModulePer__Permi__772B9A0B">
+            <End Role="PermissionType" EntitySet="PermissionTypes" />
+            <End Role="ModulePermissions" EntitySet="ModulePermissions" />
+          </AssociationSet>
+          <EntitySet Name="Users" EntityType="PeachDigitalAdministrationModel.User" />
+          <EntitySet Name="Modules" EntityType="PeachDigitalAdministrationModel.Module" />
+          <EntitySet Name="Roles" EntityType="PeachDigitalAdministrationModel.Role" />
+          <AssociationSet Name="FK__ModulePer__Modul__707E9C7C" Association="PeachDigitalAdministrationModel.FK__ModulePer__Modul__707E9C7C">
+            <End Role="Module" EntitySet="Modules" />
+            <End Role="ModulePermission" EntitySet="ModulePermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ModulePer__RoleI__6F8A7843" Association="PeachDigitalAdministrationModel.FK__ModulePer__RoleI__6F8A7843">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="ModulePermission" EntitySet="ModulePermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__RoleId__6DA22FD1" Association="PeachDigitalAdministrationModel.FK__Users__RoleId__6DA22FD1">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="Regions" EntityType="PeachDigitalAdministrationModel.Region" />
+          <EntitySet Name="Cinemas" EntityType="PeachDigitalAdministrationModel.Cinema" />
+          <AssociationSet Name="FK_Cinemas_Regions" Association="PeachDigitalAdministrationModel.FK_Cinemas_Regions">
+            <End Role="Region" EntitySet="Regions" />
+            <End Role="Cinema" EntitySet="Cinemas" />
+          </AssociationSet>
+          <EntitySet Name="CinemaAddresses" EntityType="PeachDigitalAdministrationModel.CinemaAddress" />
+          <AssociationSet Name="FK_CinemaAddress_Cinemas" Association="PeachDigitalAdministrationModel.FK_CinemaAddress_Cinemas">
+            <End Role="Cinema" EntitySet="Cinemas" />
+            <End Role="CinemaAddress" EntitySet="CinemaAddresses" />
+          </AssociationSet>
+          <EntitySet Name="BookingSystems" EntityType="PeachDigitalAdministrationModel.BookingSystem" />
+          <EntitySet Name="FilmReleaseRules" EntityType="PeachDigitalAdministrationModel.FilmReleaseRule" />
+          <EntitySet Name="Contacts" EntityType="PeachDigitalAdministrationModel.Contact" />
+          <EntitySet Name="Countries" EntityType="PeachDigitalAdministrationModel.Country" />
+          <EntitySet Name="HeadOffices" EntityType="PeachDigitalAdministrationModel.HeadOffice" />
+          <EntitySet Name="MapPoints" EntityType="PeachDigitalAdministrationModel.MapPoint" />
+          <EntitySet Name="Circuits" EntityType="PeachDigitalAdministrationModel.Circuit" />
+          <AssociationSet Name="FK_CinemaCircuit" Association="PeachDigitalAdministrationModel.FK_CinemaCircuit">
+            <End Role="Circuit" EntitySet="Circuits" />
+            <End Role="Cinema" EntitySet="Cinemas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Circuits__Contac__5B196B42" Association="PeachDigitalAdministrationModel.FK__Circuits__Contac__5B196B42">
+            <End Role="Contact" EntitySet="Contacts" />
+            <End Role="Circuit" EntitySet="Circuits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Circuits__Countr__5A254709" Association="PeachDigitalAdministrationModel.FK__Circuits__Countr__5A254709">
+            <End Role="Country" EntitySet="Countries" />
+            <End Role="Circuit" EntitySet="Circuits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Circuits__HeadOf__68A8708A" Association="PeachDigitalAdministrationModel.FK__Circuits__HeadOf__68A8708A">
+            <End Role="HeadOffice" EntitySet="HeadOffices" />
+            <End Role="Circuit" EntitySet="Circuits" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Circuits__MapPoi__5C0D8F7B" Association="PeachDigitalAdministrationModel.FK__Circuits__MapPoi__5C0D8F7B">
+            <End Role="MapPoint" EntitySet="MapPoints" />
+            <End Role="Circuit" EntitySet="Circuits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FilmReleaseRules_Circuits" Association="PeachDigitalAdministrationModel.FK_FilmReleaseRules_Circuits">
+            <End Role="Circuit" EntitySet="Circuits" />
+            <End Role="FilmReleaseRule" EntitySet="FilmReleaseRules" />
+          </AssociationSet>
+          <FunctionImport Name="UpdateCinema">
+            <Parameter Name="oldCinemaId" Mode="In" Type="Int64" />
+            <Parameter Name="newCinemaId" Mode="In" Type="Int64" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Timezone" Mode="In" Type="String" />
+            <Parameter Name="Open" Mode="In" Type="Boolean" />
+            <Parameter Name="Booking" Mode="In" Type="Boolean" />
+            <Parameter Name="Public" Mode="In" Type="Boolean" />
+            <Parameter Name="ThreeDSecure" Mode="In" Type="Boolean" />
+            <Parameter Name="Order" Mode="In" Type="Int32" />
+            <Parameter Name="ManagerName" Mode="In" Type="String" />
+            <Parameter Name="ManagerDesc" Mode="In" Type="String" />
+            <Parameter Name="External_Id" Mode="In" Type="String" />
+            <Parameter Name="BookingSystemID" Mode="In" Type="Int64" />
+            <Parameter Name="RegionId" Mode="In" Type="Int64" />
+            <Parameter Name="Circuit_Id" Mode="In" Type="Int64" />
+            <Parameter Name="DayStart" Mode="In" Type="Int32" />
+            <Parameter Name="GiftStore" Mode="In" Type="Boolean" />
+            <Parameter Name="SecondExternal_Id" Mode="In" Type="String" />
+            <Parameter Name="IsPaymentWithGiftCardEnabled" Mode="In" Type="Boolean" />
+            <Parameter Name="IsLoyaltyEarnPointsEnabled" Mode="In" Type="Boolean" />
+            <Parameter Name="TicketingUrl" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateCircuit">
+            <Parameter Name="oldCircuitId" Mode="In" Type="Int64" />
+            <Parameter Name="newCircuitId" Mode="In" Type="Int64" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="BaseURI" Mode="In" Type="String" />
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Open" Mode="In" Type="Boolean" />
+            <Parameter Name="Public" Mode="In" Type="Boolean" />
+            <Parameter Name="HeadOfficeID" Mode="In" Type="Int64" />
+            <Parameter Name="CountryID" Mode="In" Type="Int64" />
+            <Parameter Name="ContactID" Mode="In" Type="Int64" />
+            <Parameter Name="MapPointID" Mode="In" Type="Int64" />
+            <Parameter Name="UseLoyalty" Mode="In" Type="Boolean" />
+            <Parameter Name="OrderTimeoutSeconds" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="Providers" EntityType="PeachDigitalAdministrationModel.Provider" />
+          <EntitySet Name="ProviderConfigurations" EntityType="PeachDigitalAdministrationModel.ProviderConfiguration" />
+          <EntitySet Name="ProviderValueMetaDatas" EntityType="PeachDigitalAdministrationModel.ProviderValueMetaData" />
+          <EntitySet Name="ProviderValues" EntityType="PeachDigitalAdministrationModel.ProviderValue" />
+          <AssociationSet Name="FK_CircuitProvider_Providers" Association="PeachDigitalAdministrationModel.FK_CircuitProvider_Providers">
+            <End Role="Provider" EntitySet="Providers" />
+            <End Role="ProviderValue" EntitySet="ProviderValues" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProviderConfiguration_Providers" Association="PeachDigitalAdministrationModel.FK_ProviderConfiguration_Providers">
+            <End Role="Provider" EntitySet="Providers" />
+            <End Role="ProviderConfiguration" EntitySet="ProviderConfigurations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProviderValueMetaData_ProviderValues" Association="PeachDigitalAdministrationModel.FK_ProviderValueMetaData_ProviderValues">
+            <End Role="ProviderValue" EntitySet="ProviderValues" />
+            <End Role="ProviderValueMetaData" EntitySet="ProviderValueMetaDatas" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Address1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="County" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="PeachDigitalAdministrationModel.FK__Users__RoleId__6DA22FD1" FromRole="User" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="Module">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ModulePermissions" Relationship="PeachDigitalAdministrationModel.FK__ModulePer__Modul__707E9C7C" FromRole="Module" ToRole="ModulePermission" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ModulePermissions" Relationship="PeachDigitalAdministrationModel.FK__ModulePer__RoleI__6F8A7843" FromRole="Role" ToRole="ModulePermission" />
+          <NavigationProperty Name="Users" Relationship="PeachDigitalAdministrationModel.FK__Users__RoleId__6DA22FD1" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <Association Name="FK__ModulePer__Modul__707E9C7C">
+          <End Type="PeachDigitalAdministrationModel.Module" Role="Module" Multiplicity="1" />
+          <End Type="PeachDigitalAdministrationModel.ModulePermission" Role="ModulePermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Module">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModulePermission">
+              <PropertyRef Name="ModuleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ModulePer__RoleI__6F8A7843">
+          <End Type="PeachDigitalAdministrationModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="PeachDigitalAdministrationModel.ModulePermission" Role="ModulePermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ModulePermission">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__RoleId__6DA22FD1">
+          <End Type="PeachDigitalAdministrationModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="PeachDigitalAdministrationModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Cinemas" Relationship="PeachDigitalAdministrationModel.FK_Cinemas_Regions" FromRole="Region" ToRole="Cinema" />
+        </EntityType>
+        <EntityType Name="Cinema">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Timezone" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Open" Type="Boolean" Nullable="false" />
+          <Property Name="Booking" Type="Boolean" Nullable="false" />
+          <Property Name="Public" Type="Boolean" Nullable="false" />
+          <Property Name="ThreeDSecure" Type="Boolean" Nullable="false" />
+          <Property Name="Order" Type="Int32" Nullable="false" />
+          <Property Name="ManagerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ManagerDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="External_Id" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BookingSystemID" Type="Int64" />
+          <Property Name="RegionId" Type="Int64" />
+          <Property Name="Circuit_Id" Type="Int64" />
+          <Property Name="DayStart" Type="Int32" Nullable="false" />
+          <Property Name="GiftStore" Type="Boolean" />
+          <Property Name="SecondExternal_Id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IsPaymentWithGiftCardEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="IsLoyaltyEarnPointsEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="TicketingUrl" Type="String" MaxLength="265" FixedLength="false" Unicode="false" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Region" Relationship="PeachDigitalAdministrationModel.FK_Cinemas_Regions" FromRole="Cinema" ToRole="Region" />
+          <NavigationProperty Name="CinemaAddress" Relationship="PeachDigitalAdministrationModel.FK_CinemaAddress_Cinemas" FromRole="Cinema" ToRole="CinemaAddress" />
+          <NavigationProperty Name="Circuit" Relationship="PeachDigitalAdministrationModel.FK_CinemaCircuit" FromRole="Cinema" ToRole="Circuit" />
+        </EntityType>
+        <Association Name="FK_Cinemas_Regions">
+          <End Type="PeachDigitalAdministrationModel.Region" Role="Region" Multiplicity="0..1" />
+          <End Type="PeachDigitalAdministrationModel.Cinema" Role="Cinema" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Region">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cinema">
+              <PropertyRef Name="RegionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CinemaAddress">
+          <Key>
+            <PropertyRef Name="CinemaId" />
+          </Key>
+          <Property Name="CinemaId" Type="Int64" Nullable="false" />
+          <Property Name="Address1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="GeoLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContactEmail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ContactPhone" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cinema" Relationship="PeachDigitalAdministrationModel.FK_CinemaAddress_Cinemas" FromRole="CinemaAddress" ToRole="Cinema" />
+        </EntityType>
+        <Association Name="FK_CinemaAddress_Cinemas">
+          <End Type="PeachDigitalAdministrationModel.Cinema" Role="Cinema" Multiplicity="1" />
+          <End Type="PeachDigitalAdministrationModel.CinemaAddress" Role="CinemaAddress" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Cinema">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CinemaAddress">
+              <PropertyRef Name="CinemaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BookingSystem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookingURI" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AllocatedSeating" Type="Boolean" Nullable="false" />
+          <Property Name="LoyaltyEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="Concessions" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MobileTickets" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SoldOutPercentage" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CinemaId" Type="Int64" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FilmReleaseRule">
+          <Key>
+            <PropertyRef Name="CircuitId" />
+            <PropertyRef Name="FilmReleaseTypeId" />
+          </Key>
+          <Property Name="CircuitId" Type="Int64" Nullable="false" />
+          <Property Name="FilmReleaseTypeId" Type="Int32" Nullable="false" />
+          <Property Name="OpeningDate" Type="Int32" />
+          <Property Name="DateOfFirstSession" Type="Int32" />
+          <Property Name="DateOfLastSession" Type="Int32" />
+          <Property Name="IsScheduled" Type="Boolean" />
+          <Property Name="ComingSoon" Type="Boolean" />
+          <Property Name="ComingSoonAttribute" Type="Int32" />
+          <Property Name="ComingSoonByCinema" Type="Boolean" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Circuit" Relationship="PeachDigitalAdministrationModel.FK_FilmReleaseRules_Circuits" FromRole="FilmReleaseRule" ToRole="Circuit" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BookingLine" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Circuits" Relationship="PeachDigitalAdministrationModel.FK__Circuits__Contac__5B196B42" FromRole="Contact" ToRole="Circuit" />
+        </EntityType>
+        <EntityType Name="Country">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Capital" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Circuits" Relationship="PeachDigitalAdministrationModel.FK__Circuits__Countr__5A254709" FromRole="Country" ToRole="Circuit" />
+        </EntityType>
+        <EntityType Name="HeadOffice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Postcode" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Timezone" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Circuits" Relationship="PeachDigitalAdministrationModel.FK__Circuits__HeadOf__68A8708A" FromRole="HeadOffice" ToRole="Circuit" />
+        </EntityType>
+        <EntityType Name="MapPoint">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Lat" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Long" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Circuits" Relationship="PeachDigitalAdministrationModel.FK__Circuits__MapPoi__5C0D8F7B" FromRole="MapPoint" ToRole="Circuit" />
+        </EntityType>
+        <EntityType Name="Circuit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="BaseURI" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Open" Type="Boolean" Nullable="false" />
+          <Property Name="Public" Type="Boolean" Nullable="false" />
+          <Property Name="HeadOfficeID" Type="Int64" Nullable="false" />
+          <Property Name="CountryID" Type="Int64" Nullable="false" />
+          <Property Name="ContactID" Type="Int64" Nullable="false" />
+          <Property Name="MapPointID" Type="Int64" Nullable="false" />
+          <Property Name="UseLoyalty" Type="Boolean" />
+          <Property Name="OrderTimeoutSeconds" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Cinemas" Relationship="PeachDigitalAdministrationModel.FK_CinemaCircuit" FromRole="Circuit" ToRole="Cinema" />
+          <NavigationProperty Name="Contact" Relationship="PeachDigitalAdministrationModel.FK__Circuits__Contac__5B196B42" FromRole="Circuit" ToRole="Contact" />
+          <NavigationProperty Name="Country" Relationship="PeachDigitalAdministrationModel.FK__Circuits__Countr__5A254709" FromRole="Circuit" ToRole="Country" />
+          <NavigationProperty Name="HeadOffice" Relationship="PeachDigitalAdministrationModel.FK__Circuits__HeadOf__68A8708A" FromRole="Circuit" ToRole="HeadOffice" />
+          <NavigationProperty Name="MapPoint" Relationship="PeachDigitalAdministrationModel.FK__Circuits__MapPoi__5C0D8F7B" FromRole="Circuit" ToRole="MapPoint" />
+          <NavigationProperty Name="FilmReleaseRules" Relationship="PeachDigitalAdministrationModel.FK_FilmReleaseRules_Circuits" FromRole="Circuit" ToRole="FilmReleaseRule" />
+        </EntityType>
+        <Association Name="FK_CinemaCircuit">
+          <End Type="PeachDigitalAdministrationModel.Circuit" Role="Circuit" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="PeachDigitalAdministrationModel.Cinema" Role="Cinema" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Circuit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cinema">
+              <PropertyRef Name="Circuit_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Circuits__Contac__5B196B42">
+          <End Type="PeachDigitalAdministrationModel.Contact" Role="Contact" Multiplicity="1" />
+          <End Type="PeachDigitalAdministrationModel.Circuit" Role="Circuit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Circuit">
+              <PropertyRef Name="ContactID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Circuits__Countr__5A254709">
+          <End Type="PeachDigitalAdministrationModel.Country" Role="Country" Multiplicity="1" />
+          <End Type="PeachDigitalAdministrationModel.Circuit" Role="Circuit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Country">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Circuit">
+              <PropertyRef Name="CountryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Circuits__HeadOf__68A8708A">
+          <End Type="PeachDigitalAdministrationModel.HeadOffice" Role="HeadOffice" Multiplicity="1" />
+          <End Type="PeachDigitalAdministrationModel.Circuit" Role="Circuit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HeadOffice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Circuit">
+              <PropertyRef Name="HeadOfficeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Circuits__MapPoi__5C0D8F7B">
+          <End Type="PeachDigitalAdministrationModel.MapPoint" Role="MapPoint" Multiplicity="1" />
+          <End Type="PeachDigitalAdministrationModel.Circuit" Role="Circuit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MapPoint">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Circuit">
+              <PropertyRef Name="MapPointID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FilmReleaseRules_Circuits">
+          <End Type="PeachDigitalAdministrationModel.Circuit" Role="Circuit" Multiplicity="1" />
+          <End Type="PeachDigitalAdministrationModel.FilmReleaseRule" Role="FilmReleaseRule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Circuit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FilmReleaseRule">
+              <PropertyRef Name="CircuitId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Provider">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VersionNumber" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="ProviderValues" Relationship="PeachDigitalAdministrationModel.FK_CircuitProvider_Providers" FromRole="Provider" ToRole="ProviderValue" />
+          <NavigationProperty Name="ProviderConfigurations" Relationship="PeachDigitalAdministrationModel.FK_ProviderConfiguration_Providers" FromRole="Provider" ToRole="ProviderConfiguration" />
+        </EntityType>
+        <EntityType Name="ProviderConfiguration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProviderId" Type="Int32" />
+          <Property Name="Action" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UrlAction" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Format" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Method" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Provider" Relationship="PeachDigitalAdministrationModel.FK_ProviderConfiguration_Providers" FromRole="ProviderConfiguration" ToRole="Provider" />
+        </EntityType>
+        <EntityType Name="ProviderValueMetaData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProviderValueId" Type="Int64" Nullable="false" />
+          <Property Name="KeyProvider" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ValueProvider" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ModeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ProviderValue" Relationship="PeachDigitalAdministrationModel.FK_ProviderValueMetaData_ProviderValues" FromRole="ProviderValueMetaData" ToRole="ProviderValue" />
+        </EntityType>
+        <EntityType Name="ProviderValue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProviderId" Type="Int32" Nullable="false" />
+          <Property Name="ModeId" Type="Int32" Nullable="false" />
+          <Property Name="CircuitId" Type="Int64" />
+          <Property Name="CinemaId" Type="Int64" />
+          <Property Name="ProviderSetUpName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ServiceName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ProviderUrl" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="UserName" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="ClientID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="WorkStationCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ClientClass" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PerformPayment" Type="Boolean" Nullable="false" />
+          <Property Name="TemplatePrintStream" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ClubId" Type="Int32" />
+          <NavigationProperty Name="Provider" Relationship="PeachDigitalAdministrationModel.FK_CircuitProvider_Providers" FromRole="ProviderValue" ToRole="Provider" />
+          <NavigationProperty Name="ProviderValueMetaDatas" Relationship="PeachDigitalAdministrationModel.FK_ProviderValueMetaData_ProviderValues" FromRole="ProviderValue" ToRole="ProviderValueMetaData" />
+        </EntityType>
+        <Association Name="FK_CircuitProvider_Providers">
+          <End Type="PeachDigitalAdministrationModel.Provider" Role="Provider" Multiplicity="1" />
+          <End Type="PeachDigitalAdministrationModel.ProviderValue" Role="ProviderValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProviderValue">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProviderConfiguration_Providers">
+          <End Type="PeachDigitalAdministrationModel.Provider" Role="Provider" Multiplicity="0..1" />
+          <End Type="PeachDigitalAdministrationModel.ProviderConfiguration" Role="ProviderConfiguration" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Provider">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProviderConfiguration">
+              <PropertyRef Name="ProviderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProviderValueMetaData_ProviderValues">
+          <End Type="PeachDigitalAdministrationModel.ProviderValue" Role="ProviderValue" Multiplicity="1" />
+          <End Type="PeachDigitalAdministrationModel.ProviderValueMetaData" Role="ProviderValueMetaData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProviderValue">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProviderValueMetaData">
+              <PropertyRef Name="ProviderValueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PeachDigitalAdministrationModelStoreContainer" CdmEntityContainer="PeachAdministrationEntities">
+          <EntitySetMapping Name="ModulePermissions">
+            <EntityTypeMapping TypeName="PeachDigitalAdministrationModel.ModulePermission">
+              <MappingFragment StoreEntitySet="ModulePermissions">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="ModuleId" ColumnName="ModuleId" />
+                <ScalarProperty Name="PermissionId" ColumnName="PermissionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PermissionTypes">
+            <EntityTypeMapping TypeName="PeachDigitalAdministrationModel.PermissionType">
+              <MappingFragment StoreEntitySet="PermissionType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="PeachDigitalAdministrationModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="County" ColumnName="County" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Modules">
+            <EntityTypeMapping TypeName="PeachDigitalAdministrationModel.Module">
+              <MappingFragment StoreEntitySet="Modules">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="PeachDigitalAdministrationModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regions">
+            <EntityTypeMapping TypeName="PeachDigitalAdministrationModel.Region">
+              <MappingFragment StoreEntitySet="Regions">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cinemas">
+            <EntityTypeMapping TypeName="PeachDigitalAdministrationModel.Cinema">
+              <MappingFragment StoreEntitySet="Cinemas">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="TicketingUrl" ColumnName="TicketingUrl" />
+                <ScalarProperty Name="IsLoyaltyEarnPointsEnabled" ColumnName="IsLoyaltyEarnPointsEnabled" />
+                <ScalarProperty Name="IsPaymentWithGiftCardEnabled" ColumnName="IsPaymentWithGiftCardEnabled" />
+                <ScalarProperty Name="SecondExternal_Id" ColumnName="SecondExternal_Id" />
+                <ScalarProperty Name="GiftStore" ColumnName="GiftStore" />
+                <ScalarProperty Name="DayStart" ColumnName="DayStart" />
+                <ScalarProperty Name="Circuit_Id" ColumnName="Circuit_Id" />
+                <ScalarProperty Name="RegionId" ColumnName="RegionId" />
+                <ScalarProperty Name="BookingSystemID" ColumnName="BookingSystemID" />
+                <ScalarProperty Name="External_Id" ColumnName="External_Id" />
+                <ScalarProperty Name="ManagerDesc" ColumnName="ManagerDesc" />
+                <ScalarProperty Name="ManagerName" ColumnName="ManagerName" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="ThreeDSecure" ColumnName="ThreeDSecure" />
+                <ScalarProperty Name="Public" ColumnName="Public" />
+                <ScalarProperty Name="Booking" ColumnName="Booking" />
+                <ScalarProperty Name="Open" ColumnName="Open" />
+                <ScalarProperty Name="Timezone" ColumnName="Timezone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CinemaAddresses">
+            <EntityTypeMapping TypeName="PeachDigitalAdministrationModel.CinemaAddress">
+              <MappingFragment StoreEntitySet="CinemaAddress">
+                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+                <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+                <ScalarProperty Name="GeoLocation" ColumnName="GeoLocation" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="CinemaId" ColumnName="CinemaId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookingSystems">
+            <EntityTypeMapping TypeName="PeachDigitalAdministrationModel.BookingSystem">
+              <MappingFragment StoreEntitySet="BookingSystems">
+                <ScalarProperty Name="CinemaId" ColumnName="CinemaId" />
+                <ScalarProperty Name="SoldOutPercentage" ColumnName="SoldOutPercentage" />
+                <ScalarProperty Name="MobileTickets" ColumnName="MobileTickets" />
+                <ScalarProperty Name="Concessions" ColumnName="Concessions" />
+                <ScalarProperty Name="LoyaltyEnabled" ColumnName="LoyaltyEnabled" />
+                <ScalarProperty Name="AllocatedSeating" ColumnName="AllocatedSeating" />
+                <ScalarProperty Name="BookingURI" ColumnName="BookingURI" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FilmReleaseRules">
+            <EntityTypeMapping TypeName="PeachDigitalAdministrationModel.FilmReleaseRule">
+              <MappingFragment StoreEntitySet="FilmReleaseRules">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ComingSoonByCinema" ColumnName="ComingSoonByCinema" />
+                <ScalarProperty Name="ComingSoonAttribute" ColumnName="ComingSoonAttribute" />
+                <ScalarProperty Name="ComingSoon" ColumnName="ComingSoon" />
+                <ScalarProperty Name="IsScheduled" ColumnName="IsScheduled" />
+                <ScalarProperty Name="DateOfLastSession" ColumnName="DateOfLastSession" />
+                <ScalarProperty Name="DateOfFirstSession" ColumnName="DateOfFirstSession" />
+                <ScalarProperty Name="OpeningDate" ColumnName="OpeningDate" />
+                <ScalarProperty Name="FilmReleaseTypeId" ColumnName="FilmReleaseTypeId" />
+                <ScalarProperty Name="CircuitId" ColumnName="CircuitId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="PeachDigitalAdministrationModel.Contact">
+              <MappingFragment StoreEntitySet="Contacts">
+                <ScalarProperty Name="BookingLine" ColumnName="BookingLine" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="PeachDigitalAdministrationModel.Country">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="Capital" ColumnName="Capital" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HeadOffices">
+            <EntityTypeMapping TypeName="PeachDigitalAdministrationModel.HeadOffice">
+              <MappingFragment StoreEntitySet="HeadOffices">
+                <ScalarProperty Name="Timezone" ColumnName="Timezone" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Postcode" ColumnName="Postcode" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MapPoints">
+            <EntityTypeMapping TypeName="PeachDigitalAdministrationModel.MapPoint">
+              <MappingFragment StoreEntitySet="MapPoints">
+                <ScalarProperty Name="Long" ColumnName="Long" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Circuits">
+            <EntityTypeMapping TypeName="PeachDigitalAdministrationModel.Circuit">
+              <MappingFragment StoreEntitySet="Circuits">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="OrderTimeoutSeconds" ColumnName="OrderTimeoutSeconds" />
+                <ScalarProperty Name="UseLoyalty" ColumnName="UseLoyalty" />
+                <ScalarProperty Name="MapPointID" ColumnName="MapPointID" />
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+                <ScalarProperty Name="CountryID" ColumnName="CountryID" />
+                <ScalarProperty Name="HeadOfficeID" ColumnName="HeadOfficeID" />
+                <ScalarProperty Name="Public" ColumnName="Public" />
+                <ScalarProperty Name="Open" ColumnName="Open" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="BaseURI" ColumnName="BaseURI" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UpdateCinema" FunctionName="PeachDigitalAdministrationModel.Store.UpdateCinema" />
+          <FunctionImportMapping FunctionImportName="UpdateCircuit" FunctionName="PeachDigitalAdministrationModel.Store.UpdateCircuit" />
+          <EntitySetMapping Name="Providers">
+            <EntityTypeMapping TypeName="PeachDigitalAdministrationModel.Provider">
+              <MappingFragment StoreEntitySet="Provider">
+                <ScalarProperty Name="VersionNumber" ColumnName="VersionNumber" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProviderConfigurations">
+            <EntityTypeMapping TypeName="PeachDigitalAdministrationModel.ProviderConfiguration">
+              <MappingFragment StoreEntitySet="ProviderConfiguration">
+                <ScalarProperty Name="Method" ColumnName="Method" />
+                <ScalarProperty Name="Format" ColumnName="Format" />
+                <ScalarProperty Name="UrlAction" ColumnName="UrlAction" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProviderValueMetaDatas">
+            <EntityTypeMapping TypeName="PeachDigitalAdministrationModel.ProviderValueMetaData">
+              <MappingFragment StoreEntitySet="ProviderValueMetaData">
+                <ScalarProperty Name="ModeId" ColumnName="ModeId" />
+                <ScalarProperty Name="ValueProvider" ColumnName="ValueProvider" />
+                <ScalarProperty Name="KeyProvider" ColumnName="KeyProvider" />
+                <ScalarProperty Name="ProviderValueId" ColumnName="ProviderValueId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProviderValues">
+            <EntityTypeMapping TypeName="PeachDigitalAdministrationModel.ProviderValue">
+              <MappingFragment StoreEntitySet="ProviderValues">
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" />
+                <ScalarProperty Name="TemplatePrintStream" ColumnName="TemplatePrintStream" />
+                <ScalarProperty Name="PerformPayment" ColumnName="PerformPayment" />
+                <ScalarProperty Name="ClientClass" ColumnName="ClientClass" />
+                <ScalarProperty Name="WorkStationCode" ColumnName="WorkStationCode" />
+                <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="ProviderUrl" ColumnName="ProviderUrl" />
+                <ScalarProperty Name="ServiceName" ColumnName="ServiceName" />
+                <ScalarProperty Name="ProviderSetUpName" ColumnName="ProviderSetUpName" />
+                <ScalarProperty Name="CinemaId" ColumnName="CinemaId" />
+                <ScalarProperty Name="CircuitId" ColumnName="CircuitId" />
+                <ScalarProperty Name="ModeId" ColumnName="ModeId" />
+                <ScalarProperty Name="ProviderId" ColumnName="ProviderId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

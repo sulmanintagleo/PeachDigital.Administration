@@ -1,0 +1,243 @@
+﻿@model PeachDigital.Administration.Models.Cinema
+
+@{
+    ViewBag.Title = "Edit Cinema";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>
+    Cinema
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/Cinemas">Cinemas</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit Cinema</li>
+        </ol>
+    </nav>
+</h2>
+
+<div class="row main-content">
+    <div class="col-sm-12">
+        <div class="form-area">
+            <h3>Edit Cinema</h3>
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditCinema" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                if (ViewBag.ErrorMessage != null)
+                {
+                    <p class="text-danger">@ViewBag.ErrorMessage</p>
+                }
+
+                <input type="hidden" name="oldCinemaId" id="oldCinemaId" value="@ViewBag.OldCinemaId" />
+
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "" })
+                            @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", min = "0" } })
+                            @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "" })
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="">Time Zone</label>
+                            @Html.DropDownList("Timezone", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Timezone, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Order, htmlAttributes: new { @class = "" })
+                            @Html.EditorFor(model => model.Order, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Order, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="">Manager Name</label>
+                            @Html.EditorFor(model => model.ManagerName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ManagerName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="">Manager Desc</label>
+                            @Html.EditorFor(model => model.ManagerDesc, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ManagerDesc, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="">External Id</label>
+                            @Html.EditorFor(model => model.External_Id, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.External_Id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="">Booking System Id</label>
+                            @Html.DropDownList("BookingSystemID", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.BookingSystemID, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="">Region</label>
+                            @Html.DropDownList("RegionId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.RegionId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="">Circuit</label>
+                            @Html.DropDownList("Circuit_Id", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Circuit_Id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="">Day Start</label>
+                            @Html.EditorFor(model => model.DayStart, new { htmlAttributes = new { @class = "form-control", min = "0", max = "23" } })
+                            @Html.ValidationMessageFor(model => model.DayStart, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="">Gift Store</label>
+                            @Html.DropDownList("GiftStore", null, htmlAttributes: new { @class = "form-control" })
+                            @*@Html.EditorFor(model => model.GiftStore)*@
+                            @Html.ValidationMessageFor(model => model.GiftStore, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="">Second External Id</label>
+                            @Html.EditorFor(model => model.SecondExternal_Id, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SecondExternal_Id, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label class="">Ticketing URL</label>
+                            @Html.EditorFor(model => model.TicketingUrl, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.TicketingUrl, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="checkbox" class="custom-checkbox" name="Open" id="Open" value="" />
+                            @Html.LabelFor(model => model.Open, htmlAttributes: new { @class = "" })
+                            @*@Html.EditorFor(model => model.Open)*@
+                            @Html.ValidationMessageFor(model => model.Open, "", new { @class = "text-danger" })
+                            <input type="checkbox" class="custom-checkbox" name="Booking" id="Booking" />
+                            @Html.LabelFor(model => model.Booking, htmlAttributes: new { @class = "" })
+                            @*@Html.EditorFor(model => model.Booking)*@
+                            @Html.ValidationMessageFor(model => model.Booking, "", new { @class = "text-danger" })
+                            <input type="checkbox" class="custom-checkbox" name="Public" id="Public" />
+                            @Html.LabelFor(model => model.Public, htmlAttributes: new { @class = "" })
+                            @*@Html.EditorFor(model => model.Public)*@
+                            @Html.ValidationMessageFor(model => model.Public, "", new { @class = "text-danger" })
+                            <input type="checkbox" class="custom-checkbox" name="ThreeDSecure" id="ThreeDSecure" />
+                            <label class="">3D Secure</label>
+                            @*@Html.EditorFor(model => model.ThreeDSecure)*@
+                            @Html.ValidationMessageFor(model => model.ThreeDSecure, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <input type="checkbox" class="custom-checkbox" name="IsPaymentWithGiftCardEnabled" id="IsPaymentWithGiftCardEnabled" />
+                            <label class="">Gift Card Payment Enabled</label>
+                            @*@Html.EditorFor(model => model.IsPaymentWithGiftCardEnabled)*@
+                            @Html.ValidationMessageFor(model => model.IsPaymentWithGiftCardEnabled, "", new { @class = "text-danger" })
+                            <input type="checkbox" class="custom-checkbox" name="IsLoyaltyEarnPointsEnabled" id="IsLoyaltyEarnPointsEnabled" />
+                            <label class="">Loyalty Earn Points Enabled</label>
+                            @*@Html.EditorFor(model => model.IsLoyaltyEarnPointsEnabled)*@
+                            @Html.ValidationMessageFor(model => model.IsLoyaltyEarnPointsEnabled, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <div class="submit-btns">
+                            <button type="button" class="btn-cancel">Cancel</button>
+                            <button type="submit" class="btn-save">Update</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#frmEditCinema').validate({
+                errorClass: 'help-block animation-slideDown',
+                errorElement: 'div',
+                errorPlacement: function (error, e) {
+                    e.parents('.form-group > div').append(error);
+                },
+                highlight: function (e) {
+                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block').remove();
+                },
+                success: function (e) {
+                    e.closest('.form-group').removeClass('has-success has-error');
+                    e.closest('.help-block').remove();
+                },
+                rules: {
+                    'Name': {
+                        required: true
+                    },
+                    'Timezone': {
+                        required: true
+                    },
+                    'Order': {
+                        required: true,
+                    },
+                    'DayStart': {
+                        required: true,
+                    }
+                },
+                messages: {
+                    'Name': 'Name is required',
+                    'Timezone': 'Time zone is required',
+                    'Order': 'Order is required',
+                    'DayStart': 'Day start is required',
+                }
+            });
+
+            $('input[type=submit]').click(function () {
+                $(this).attr('disabled', 'disabled');
+                $(this).parents('form').submit();
+            });
+
+            $('.btn-cancel').click(function () {
+                window.location = "/Cinemas";
+            });
+
+        });
+
+    </script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

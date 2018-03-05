@@ -1,0 +1,99 @@
+﻿@model PeachDigital.Administration.Models.Role
+
+@{
+    ViewBag.Title = "PDA | Update Role";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>
+    Role
+    <nav class="breadcrumb-nav" aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/Roles">Roles</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Edit Role</li>
+        </ol>
+    </nav>
+</h2>
+
+
+<div class="row main-content">
+    <div class="col-sm-12">
+        <div class="form-area">
+            <h3>Add Role</h3>
+            @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditRole" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                if (ViewBag.ErrorMessage != null)
+                {
+                    <p class="text-danger">@ViewBag.ErrorMessage</p>
+                }
+                @Html.HiddenFor(model => model.Id)
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "" })
+                            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" }, maxlength = "50" })
+                            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <div class="submit-btns">
+                            <button type="button" class="btn-cancel">Cancel</button>
+                            <button type="submit" class="btn-save">Update</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#frmEditRole').validate({
+                errorClass: 'help-block animation-slideDown',
+                errorElement: 'div',
+                errorPlacement: function (error, e) {
+                    e.parents('.form-group > div').append(error);
+                },
+                highlight: function (e) {
+                    $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+                    $(e).closest('.help-block').remove();
+                },
+                success: function (e) {
+                    e.closest('.form-group').removeClass('has-success has-error');
+                    e.closest('.help-block').remove();
+                },
+                rules: {
+                    'Name': {
+                        required: true,
+                        maxlength: 50
+                    }
+                },
+                messages: {
+                    'Name': 'Role name is required'
+                }
+            });
+
+            $('input[type=submit]').click(function () {
+                $(this).attr('disabled', 'disabled');
+                $(this).parents('form').submit();
+            });
+
+            $('.btn-cancel').click(function () {
+                window.location = "/Roles";
+            });
+
+        });
+
+    </script>
+
+    @Scripts.Render("~/bundles/jqueryval")
+}

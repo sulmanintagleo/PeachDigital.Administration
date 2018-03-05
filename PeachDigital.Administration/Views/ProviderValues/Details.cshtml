@@ -1,0 +1,139 @@
+﻿@model PeachDigital.Administration.Models.ProviderValue
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>ProviderValue</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ModeId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModeId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CircuitId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CircuitId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CinemaId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CinemaId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProviderSetUpName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProviderSetUpName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ServiceName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServiceName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProviderUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProviderUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClientID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClientID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WorkStationCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WorkStationCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClientClass)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClientClass)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PerformPayment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PerformPayment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TemplatePrintStream)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TemplatePrintStream)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ClubId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ClubId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Provider.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Provider.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

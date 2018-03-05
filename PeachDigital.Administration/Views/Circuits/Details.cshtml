@@ -1,0 +1,123 @@
+﻿@model PeachDigital.Administration.Models.Circuit
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Circuit</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BaseURI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BaseURI)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Open)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Open)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Public)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Public)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UseLoyalty)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UseLoyalty)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderTimeoutSeconds)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderTimeoutSeconds)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Contact.BookingLine)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Contact.BookingLine)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Country.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Country.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HeadOffice.Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HeadOffice.Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MapPoint.Lat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MapPoint.Lat)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

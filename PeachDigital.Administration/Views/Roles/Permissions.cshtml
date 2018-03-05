@@ -1,0 +1,88 @@
+﻿@model List<PeachDigital.Administration.Models.ModulePermission>
+@{
+    ViewBag.Title = "Permissions";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@ViewBag.RoleName Permissions</h2>
+<hr />
+<div class="row">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <input type="hidden" id="RoleId" value="@ViewBag.StringRoleId"/>
+    }
+    <div class="">
+        @foreach (var module in ViewBag.Modules)
+        {
+            <div class="moduleName col-lg-4 col-md-6 col-sm-12">
+                <h3>@module.Text</h3>
+                @foreach (var type in ViewBag.PermissionTypes)
+                {
+                    @:<div class="permissionType">
+                    @:    <label>
+
+                    if (Model != null && Model.Count > 0)
+                    {
+                        var permissionAssigned = Model.Where(p => p.ModuleId == Convert.ToInt32(module.Value) && p.PermissionId == Convert.ToInt16(type.Value)).Any();
+
+                        if (permissionAssigned)
+                        {
+                            @:<input type="checkbox" data-modulePerm="@module.Value-@type.Value" name="permission" checked="checked" value="@type.Value" />&nbsp;@type.Text
+                        }
+                        else
+                        {
+                            @:<input type="checkbox" data-modulePerm="@module.Value-@type.Value" name="permission" value="@type.Value" />&nbsp;@type.Text
+                        }
+                    }
+                    else
+                    {
+                        @:<input type="checkbox" data-modulePerm="@module.Value-@type.Value" name="permission" value="@type.Value" />&nbsp;@type.Text
+                    }
+                    @:    </label>
+                    @:</div>
+                }
+            </div>
+        }
+        
+    </div>
+</div>
+<div class="clearfix">&nbsp;</div>
+<div class="row">
+    <input type="button" value="Update" id="btnUpdatePermissions" class="btn btn-default" /> | 
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+            $(document).ready(function () {
+
+                $("#btnUpdatePermissions").click(function () {
+                    var strModulePerAry = $('[data-modulePerm]:checked').map(function () { return $(this).attr("data-modulePerm") }).get().join(',');
+                    //console.log(strModulePerAry);
+
+                    $.ajax({
+                        url: "/Roles/UpdatePermissions/",
+                        type: "post",
+                        data: { roleId: $("#RoleId").val(), permissions: strModulePerAry},
+                        success: function (response) {
+                            if (response.success) {
+                                alert(response.message);
+                                window.location.href = "/Roles";
+                            }
+                        },
+                        error: function () {
+                            alert("Access denied, Please contact to admin to get access.");
+                        }
+                    });
+                });
+            });
+
+    </script>
+
+}

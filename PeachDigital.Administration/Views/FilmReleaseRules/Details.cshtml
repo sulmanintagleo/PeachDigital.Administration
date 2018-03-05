@@ -1,0 +1,83 @@
+﻿@model PeachDigital.Administration.Models.FilmReleaseRule
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>FilmReleaseRule</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OpeningDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OpeningDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfFirstSession)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfFirstSession)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateOfLastSession)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateOfLastSession)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsScheduled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsScheduled)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComingSoon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComingSoon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComingSoonAttribute)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComingSoonAttribute)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ComingSoonByCinema)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ComingSoonByCinema)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Circuit.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Circuit.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

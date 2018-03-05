@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f9e5fa0a36a342c9ab59261952265dc1" Name="Diagram1">
+        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.ModulePermission" Width="1.5" PointX="2.875" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.PermissionType" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <AssociationConnector Association="PeachDigitalAdministrationModel.FK__ModulePer__Permi__772B9A0B" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.User" Width="1.5" PointX="3" PointY="6" />
+        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.Module" Width="1.5" PointX="6.5" PointY="5.25" />
+        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.Role" Width="1.5" PointX="0.5" PointY="1.625" />
+        <AssociationConnector Association="PeachDigitalAdministrationModel.FK__ModulePer__Modul__707E9C7C" />
+        <AssociationConnector Association="PeachDigitalAdministrationModel.FK__ModulePer__RoleI__6F8A7843" />
+        <AssociationConnector Association="PeachDigitalAdministrationModel.FK__Users__RoleId__6DA22FD1" />
+        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.Region" Width="2.25" PointX="5.125" PointY="7.75" />
+        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.Cinema" Width="1.5" PointX="8.375" PointY="0.75" />
+        <AssociationConnector Association="PeachDigitalAdministrationModel.FK_Cinemas_Regions" />
+        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.CinemaAddress" Width="1.5" PointX="10.625" PointY="10.125" />
+        <AssociationConnector Association="PeachDigitalAdministrationModel.FK_CinemaAddress_Cinemas" />
+        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.BookingSystem" Width="1.5" PointX="12.875" PointY="3.75" />
+        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.FilmReleaseRule" Width="1.5" PointX="8.375" PointY="10.25" />
+        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.Contact" Width="1.5" PointX="3.875" PointY="17.75" />
+        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.Country" Width="1.5" PointX="3.875" PointY="15.125" />
+        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.HeadOffice" Width="1.5" PointX="3.875" PointY="12.25" />
+        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.MapPoint" Width="1.5" PointX="3.875" PointY="1.75" />
+        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.Circuit" Width="1.5" PointX="6.125" PointY="10.125" />
+        <AssociationConnector Association="PeachDigitalAdministrationModel.FK_CinemaCircuit" />
+        <AssociationConnector Association="PeachDigitalAdministrationModel.FK__Circuits__Contac__5B196B42" />
+        <AssociationConnector Association="PeachDigitalAdministrationModel.FK__Circuits__Countr__5A254709" />
+        <AssociationConnector Association="PeachDigitalAdministrationModel.FK__Circuits__HeadOf__68A8708A" />
+        <AssociationConnector Association="PeachDigitalAdministrationModel.FK__Circuits__MapPoi__5C0D8F7B" />
+        <AssociationConnector Association="PeachDigitalAdministrationModel.FK_FilmReleaseRules_Circuits" />
+        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.Provider" Width="1.5" PointX="13.375" PointY="11" />
+        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.ProviderConfiguration" Width="1.5" PointX="15.625" PointY="8.25" />
+        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.ProviderValueMetaData" Width="1.5" PointX="17.875" PointY="12.5" />
+        <EntityTypeShape EntityType="PeachDigitalAdministrationModel.ProviderValue" Width="1.5" PointX="15.625" PointY="11.375" />
+        <AssociationConnector Association="PeachDigitalAdministrationModel.FK_CircuitProvider_Providers" />
+        <AssociationConnector Association="PeachDigitalAdministrationModel.FK_ProviderConfiguration_Providers" />
+        <AssociationConnector Association="PeachDigitalAdministrationModel.FK_ProviderValueMetaData_ProviderValues" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

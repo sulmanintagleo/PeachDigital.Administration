@@ -1,0 +1,79 @@
+﻿@model IEnumerable<PeachDigital.Administration.Models.User>
+
+@{
+    ViewBag.Title = "Peach Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Users</li>
+    </ol>
+</nav>
+<h2>
+    User
+    <a href="/Users/Create" class="btn btn-orange"><span class="fa fa-plus-circle"></span>add user</a>
+</h2>
+
+
+<div class="row main-content">
+    <div class="col-sm-12">
+        <div class="table-responsive tbl-pagination">
+            <table class="table table-general" id="tblUsers">
+                @*<caption>
+                    <div class="search-add-new">
+                        <a href="/Users/Create" class="btn btn-orange"><span class="fa fa-plus-circle"></span>add user</a>
+                    </div>
+                </caption>*@
+                <thead>
+                    <tr>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>@Html.DisplayNameFor(model => model.Email)</th>
+                        <th>@Html.DisplayNameFor(model => model.Password)</th>
+                        <th>Phone No</th>
+                        <th>Address 1</th>
+                        <th>Address 2</th>
+                        <th>@Html.DisplayNameFor(model => model.County)</th>
+                        <th>Zip Code</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#tblUsers').DataTable({
+                "proccessing": true,
+                "serverSide": true,
+                "bFilter":false,
+                "pagingType": "simple_numbers",
+                "sAjaxSource": "/Users/GetUsersByPaging/",
+                "columns": [
+                    { "data": "FirstName" },
+                    { "data": "LastName" },
+                    { "data": "Email" },
+                    { "data": "Password" },
+                    { "data": "PhoneNo" },
+                    { "data": "Address1" },
+                    { "data": "Address2" },
+                    { "data": "County" },
+                    { "data": "ZipCode" },
+                    { "data": "RoleName" },
+                    { "data": "Actions" }
+                ]
+            });
+            $(".table-responsive.tbl-pagination").find('*').removeClass("row");
+            $("table").parent().removeAttr("class");
+            $(".table-responsive.tbl-pagination").find('*').removeClass("col-sm-6");
+        });
+    </script>
+}

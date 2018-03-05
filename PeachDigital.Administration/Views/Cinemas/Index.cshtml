@@ -1,0 +1,175 @@
+﻿@*@model IEnumerable<PeachDigital.Administration.Models.Cinema>*@
+@{
+    ViewBag.Title = "Cinemas";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Cinemas</li>
+    </ol>
+</nav>
+<h2>
+    Cinema
+
+    <a href="/Cinemas/Create" class="btn btn-orange"><span class="fa fa-plus-circle"></span>add Cinema</a>
+    @Html.DropDownList("Circuits", null, htmlAttributes: new { @class = "form-control search-input" })
+</h2>
+
+
+<div class="row main-content">
+
+    @*<div class="search-add-new" style="width:50%;">
+            <a href="/Cinemas/Create" class="btn btn-orange"><span class="fa fa-plus-circle"></span>add Cinema</a>
+        </div>*@
+    <div class="col-sm-12">
+        <div class="table-responsive tbl-pagination">
+            <table class="table table-general" id="tblCinemas">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Time Zone</th>
+                        <th>Open</th>
+                        <th>Booking</th>
+                        <th>Public</th>
+                        <th>3D Secure</th>
+                        <th>Order</th>
+                        <th>Manager Name</th>
+                        <th>Manager Desc</th>
+                        <th>External Id</th>
+                        <th>Booking System Id</th>
+                        <th>Region</th>
+                        <th>Circuit</th>
+                        <th>Day Start</th>
+                        <th>Gift Store</th>
+                        <th>Second External Id</th>
+                        <th>Gift Card Payment Enabled</th>
+                        <th>Loyalty Earn Points Enabled</th>
+                        <th>Ticketing Url</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#Circuits").prepend("<option value='' selected='selected'>Select Circuit</option>");
+
+            $('#tblCinemas').DataTable({
+                "proccessing": true,
+                "serverSide": true,
+                "bFilter":false,
+                "pagingType": "simple_numbers",
+                "sAjaxSource": "/Cinemas/GetCinemasByPaging/",
+                "columns": [
+                    { "data": "Name"},
+                    { "data": "Timezone"},
+                    { "data": "Open"},
+                    { "data": "Booking" },
+                    { "data": "Public" },
+                    { "data": "ThreeDSecure" },
+                    { "data": "Order" },
+                    { "data": "ManagerName" },
+                    { "data": "ManagerDesc" },
+                    { "data": "External_Id" },
+                    { "data": "BookingSystemID" },
+                    { "data": "Region" },
+                    { "data": "Circuit" },
+                    { "data": "DayStart" },
+                    { "data": "GiftStore" },
+                    { "data": "SecondExternal_Id" },
+                    { "data": "IsPaymentWithGiftCardEnabled" },
+                    { "data": "IsLoyaltyEarnPointsEnabled" },
+                    { "data": "TicketingUrl" },
+                    { "data": "Actions" },
+                ]
+            });
+
+            $("#Circuits").change(function () {
+
+                if ($("#Circuits option:selected").val() != "") {
+                    $("#tblCinemas").dataTable().fnDestroy();
+                    $('#tblCinemas').DataTable({
+                        "proccessing": true,
+                        "serverSide": true,
+                        "bFilter": false,
+                        "pagingType": "simple_numbers",
+                        "sAjaxSource": "/Cinemas/GetCinemasByPaging?circuitId=" + $("#Circuits").val(),
+                        "columns": [
+                            { "data": "Name" },
+                            { "data": "Timezone" },
+                            { "data": "Open" },
+                            { "data": "Booking" },
+                            { "data": "Public" },
+                            { "data": "ThreeDSecure" },
+                            { "data": "Order" },
+                            { "data": "ManagerName" },
+                            { "data": "ManagerDesc" },
+                            { "data": "External_Id" },
+                            { "data": "BookingSystemID" },
+                            { "data": "Region" },
+                            { "data": "Circuit" },
+                            { "data": "DayStart" },
+                            { "data": "GiftStore" },
+                            { "data": "SecondExternal_Id" },
+                            { "data": "IsPaymentWithGiftCardEnabled" },
+                            { "data": "IsLoyaltyEarnPointsEnabled" },
+                            { "data": "TicketingUrl" },
+                            { "data": "Actions" },
+                        ]
+                    });
+                } else {
+                    $("#tblCinemas").dataTable().fnDestroy();
+                    $('#tblCinemas').DataTable({
+                        "proccessing": true,
+                        "serverSide": true,
+                        "bFilter": false,
+                        "pagingType": "simple_numbers",
+                        "sAjaxSource": "/Cinemas/GetCinemasByPaging/",
+                        "columns": [
+                            { "data": "Name" },
+                            { "data": "Timezone" },
+                            { "data": "Open" },
+                            { "data": "Booking" },
+                            { "data": "Public" },
+                            { "data": "ThreeDSecure" },
+                            { "data": "Order" },
+                            { "data": "ManagerName" },
+                            { "data": "ManagerDesc" },
+                            { "data": "External_Id" },
+                            { "data": "BookingSystemID" },
+                            { "data": "Region" },
+                            { "data": "Circuit" },
+                            { "data": "DayStart" },
+                            { "data": "GiftStore" },
+                            { "data": "SecondExternal_Id" },
+                            { "data": "IsPaymentWithGiftCardEnabled" },
+                            { "data": "IsLoyaltyEarnPointsEnabled" },
+                            { "data": "TicketingUrl" },
+                            { "data": "Actions" },
+                        ]
+                    });
+                }
+                //Remove extra classes
+                $(".table-responsive.tbl-pagination").find('*').removeClass("row");
+                $("table").parent().removeAttr("class");
+                $(".table-responsive.tbl-pagination").find('*').removeClass("col-sm-6");
+            });
+
+            //Remove extra classes
+            $(".table-responsive.tbl-pagination").find('*').removeClass("row");
+            $("table").parent().removeAttr("class");
+            $(".table-responsive.tbl-pagination").find('*').removeClass("col-sm-6");
+        });
+
+    </script>
+
+}

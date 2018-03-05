@@ -1,0 +1,77 @@
+﻿@model IEnumerable<PeachDigital.Administration.Models.FilmReleaseRule>
+
+@{
+    ViewBag.Title = "Film Release Rules";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Film Release Rules</li>
+    </ol>
+</nav>
+<h2>
+    Film Release Rule
+    <a href="/FilmReleaseRules/Create" class="btn btn-orange"><span class="fa fa-plus-circle"></span>add Rule</a>
+</h2>
+
+<div class="row main-content">
+    <div class="col-sm-12">
+        <div class="table-responsive tbl-pagination">
+            <table class="table table-general" id="tblFilmReleaseRules">
+                @*<caption>
+                    <div class="search-add-new">
+                        <a href="/FilmReleaseRules/Create" class="btn btn-orange"><span class="fa fa-plus-circle"></span>add Rule</a>
+                    </div>
+                </caption>*@
+                <thead>
+                    <tr>
+                        <th>Opening Date</th>
+                        <th>First Session Date</th>
+                        <th>Last Session Date</th>
+                        <th>Scheduled</th>
+                        <th>Coming Soon</th>
+                        <th>Coming Soon Attribute</th>
+                        <th>Coming Soon By Cinema</th>
+                        <th>Circuit</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#tblFilmReleaseRules').DataTable({
+                "proccessing": true,
+                "serverSide": true,
+                "bFilter":false,
+                "pagingType": "simple_numbers",
+                "sAjaxSource": "/FilmReleaseRules/GetFilmReleaseRulesByPaging/",
+                "columns": [
+                    { "data": "OpeningDate"},
+                    { "data": "DateOfFirstSession"},
+                    { "data": "DateOfLastSession"},
+                    { "data": "IsScheduled" },
+                    { "data": "ComingSoon" },
+                    { "data": "ComingSoonAttribute" },
+                    { "data": "ComingSoonByCinema" },
+                    { "data": "CircuitName" },
+                    { "data": "Actions" }
+                ]
+            });
+            $(".table-responsive.tbl-pagination").find('*').removeClass("row");
+            $("table").parent().removeAttr("class");
+            $(".table-responsive.tbl-pagination").find('*').removeClass("col-sm-6");
+        });
+
+    </script>
+
+}

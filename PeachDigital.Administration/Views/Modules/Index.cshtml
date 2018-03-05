@@ -1,0 +1,64 @@
+﻿@model IEnumerable<PeachDigital.Administration.Models.Module>
+@using PeachDigital.Administration.Common.Helper;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Modules</li>
+    </ol>
+</nav>
+<h2>
+    Module
+    <a href="/Modules/Create" class="btn btn-orange"><span class="fa fa-plus-circle"></span>add Module</a>
+</h2>
+
+
+<div class="row main-content">
+    <div class="col-sm-12">
+        <div class="table-responsive tbl-pagination">
+            <table class="table table-general" id="tblModules">
+                @*<caption>
+                    <div class="search-add-new">
+                        <a href="/Modules/Create" class="btn btn-orange"><span class="fa fa-plus-circle"></span>add Module</a>
+                    </div>
+                </caption>*@
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Name)</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#tblModules').DataTable({
+                "proccessing": true,
+                "serverSide": true,
+                "bFilter":false,
+                "pagingType": "simple_numbers",
+                "sAjaxSource": "/Modules/GetModulesByPaging/",
+                "columns": [
+                    { "data": "Name"},
+                    { "data": "Actions" }
+                ]
+            });
+            $(".table-responsive.tbl-pagination").find('*').removeClass("row");
+            $("table").parent().removeAttr("class");
+            $(".table-responsive.tbl-pagination").find('*').removeClass("col-sm-6");
+        });
+
+    </script>
+
+}
