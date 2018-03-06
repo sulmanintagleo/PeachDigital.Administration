@@ -1,7 +1,7 @@
 ﻿@model PeachDigital.Administration.Models.Cinema
 
 @{
-    ViewBag.Title = "Edit Cinema";
+    ViewBag.Title = "PDA | Edit Cinema";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -141,33 +141,43 @@
 
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <input type="checkbox" class="custom-checkbox" name="Open" id="Open" value="" />
+                            <input type="checkbox" class="custom-checkbox" name="Open" id="Open" value="true" @if (Model.Open) {
+                                @:checked="checked"
+                            } />
                             @Html.LabelFor(model => model.Open, htmlAttributes: new { @class = "" })
-                            @*@Html.EditorFor(model => model.Open)*@
                             @Html.ValidationMessageFor(model => model.Open, "", new { @class = "text-danger" })
-                            <input type="checkbox" class="custom-checkbox" name="Booking" id="Booking" />
+                            
+                            <input type="checkbox" class="custom-checkbox" name="Booking" id="Booking" value="true" @if (Model.Booking) {
+                                @:checked="checked"
+                            } />
                             @Html.LabelFor(model => model.Booking, htmlAttributes: new { @class = "" })
-                            @*@Html.EditorFor(model => model.Booking)*@
                             @Html.ValidationMessageFor(model => model.Booking, "", new { @class = "text-danger" })
-                            <input type="checkbox" class="custom-checkbox" name="Public" id="Public" />
+                            
+                            <input type="checkbox" class="custom-checkbox" name="Public" id="Public" value="true" @if (Model.Public) {
+                                @:checked="checked"
+                            } />
                             @Html.LabelFor(model => model.Public, htmlAttributes: new { @class = "" })
-                            @*@Html.EditorFor(model => model.Public)*@
                             @Html.ValidationMessageFor(model => model.Public, "", new { @class = "text-danger" })
-                            <input type="checkbox" class="custom-checkbox" name="ThreeDSecure" id="ThreeDSecure" />
-                            <label class="">3D Secure</label>
-                            @*@Html.EditorFor(model => model.ThreeDSecure)*@
+                            
+                            <input type="checkbox" class="custom-checkbox" name="ThreeDSecure" id="ThreeDSecure" value="true" @if (Model.ThreeDSecure) {
+                                @:checked="checked"
+                            } />
+                            <label for="ThreeDSecure">3D Secure</label>
                             @Html.ValidationMessageFor(model => model.ThreeDSecure, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <input type="checkbox" class="custom-checkbox" name="IsPaymentWithGiftCardEnabled" id="IsPaymentWithGiftCardEnabled" />
-                            <label class="">Gift Card Payment Enabled</label>
-                            @*@Html.EditorFor(model => model.IsPaymentWithGiftCardEnabled)*@
+                            <input type="checkbox" class="custom-checkbox" name="IsPaymentWithGiftCardEnabled" id="IsPaymentWithGiftCardEnabled" value="true" @if (Model.IsPaymentWithGiftCardEnabled) {
+                                @:checked="checked"
+                            } />
+                            <label for="IsPaymentWithGiftCardEnabled">Gift Card Payment Enabled</label>
                             @Html.ValidationMessageFor(model => model.IsPaymentWithGiftCardEnabled, "", new { @class = "text-danger" })
-                            <input type="checkbox" class="custom-checkbox" name="IsLoyaltyEarnPointsEnabled" id="IsLoyaltyEarnPointsEnabled" />
-                            <label class="">Loyalty Earn Points Enabled</label>
-                            @*@Html.EditorFor(model => model.IsLoyaltyEarnPointsEnabled)*@
+                            
+                            <input type="checkbox" class="custom-checkbox" name="IsLoyaltyEarnPointsEnabled" id="IsLoyaltyEarnPointsEnabled" value="true" @if (Model.IsLoyaltyEarnPointsEnabled) {
+                                @:checked="checked"
+                            } />
+                            <label for="IsLoyaltyEarnPointsEnabled">Loyalty Earn Points Enabled</label>
                             @Html.ValidationMessageFor(model => model.IsLoyaltyEarnPointsEnabled, "", new { @class = "text-danger" })
                         </div>
                     </div>

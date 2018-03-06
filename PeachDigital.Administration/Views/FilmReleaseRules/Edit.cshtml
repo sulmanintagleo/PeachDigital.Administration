@@ -1,7 +1,7 @@
 ﻿@model PeachDigital.Administration.Models.FilmReleaseRule
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "PDA | Edit Film Release Rule";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -11,7 +11,7 @@
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="/">Home</a></li>
             <li class="breadcrumb-item"><a href="/FilmReleaseRules">Film Release Rules</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Edit Release Rule</li>
+            <li class="breadcrumb-item active" aria-current="page">Edit Rule</li>
         </ol>
     </nav>
 </h2>
@@ -20,7 +20,7 @@
 <div class="row main-content">
     <div class="col-sm-12">
         <div class="form-area">
-            <h3>Edit Film Release Rule</h3>
+            <h3>Edit Rule</h3>
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()

@@ -130,34 +130,32 @@
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group checkbox-margin">
-                            <input type="checkbox" class="custom-checkbox" name="Open" id="Open" />
+                            <input type="checkbox" class="custom-checkbox" name="Open" id="Open" value="true"/>
                             @Html.LabelFor(model => model.Open, htmlAttributes: new { @class = "" })
-                            @*@Html.EditorFor(model => model.Open)*@
                             @Html.ValidationMessageFor(model => model.Open, "", new { @class = "text-danger" })
-                            <input type="checkbox" class="custom-checkbox" name="Booking" id="Booking" />
+                            
+                            <input type="checkbox" class="custom-checkbox" name="Booking" id="Booking" value="true"/>
                             @Html.LabelFor(model => model.Booking, htmlAttributes: new { @class = "" })
-                            @*@Html.EditorFor(model => model.Booking)*@
                             @Html.ValidationMessageFor(model => model.Booking, "", new { @class = "text-danger" })
-                            <input type="checkbox" class="custom-checkbox" name="Public" id="Public" />
+                            
+                            <input type="checkbox" class="custom-checkbox" name="Public" id="Public" value="true" />
                             @Html.LabelFor(model => model.Public, htmlAttributes: new { @class = "" })
-                            @*@Html.EditorFor(model => model.Public)*@
                             @Html.ValidationMessageFor(model => model.Public, "", new { @class = "text-danger" })
+                            
                             <input type="checkbox" class="custom-checkbox" name="ThreeDSecure" id="ThreeDSecure" value="true"/>
                             <label for="ThreeDSecure">3D Secure</label>
-                            @*@Html.EditorFor(model => model.ThreeDSecure)*@
                             @Html.ValidationMessageFor(model => model.ThreeDSecure, "", new { @class = "text-danger" })
                         </div>
                     </div>
                     <div class="clearfix"></div>
                     <div class="col-sm-6">
                         <div class="form-group">
-                            <input type="checkbox" class="custom-checkbox" name="IsPaymentWithGiftCardEnabled" id="IsPaymentWithGiftCardEnabled" />
+                            <input type="checkbox" class="custom-checkbox" name="IsPaymentWithGiftCardEnabled" id="IsPaymentWithGiftCardEnabled" value="true" />
                             <label for="IsPaymentWithGiftCardEnabled">Gift Card Payment Enabled</label>
-                            @*@Html.EditorFor(model => model.IsPaymentWithGiftCardEnabled)*@
                             @Html.ValidationMessageFor(model => model.IsPaymentWithGiftCardEnabled, "", new { @class = "text-danger" })
-                            <input type="checkbox" class="custom-checkbox" name="IsLoyaltyEarnPointsEnabled" id="IsLoyaltyEarnPointsEnabled" />
+                            
+                            <input type="checkbox" class="custom-checkbox" name="IsLoyaltyEarnPointsEnabled" id="IsLoyaltyEarnPointsEnabled" value="true" />
                             <label for="IsLoyaltyEarnPointsEnabled">Loyalty Earn Points Enabled</label>
-                            @*@Html.EditorFor(model => model.IsLoyaltyEarnPointsEnabled)*@
                             @Html.ValidationMessageFor(model => model.IsLoyaltyEarnPointsEnabled, "", new { @class = "text-danger" })
                         </div>
                     </div>

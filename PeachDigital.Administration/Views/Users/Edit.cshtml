@@ -1,6 +1,6 @@
 ﻿@model PeachDigital.Administration.Models.User
 @{
-    ViewBag.Title = "PDA | Update User";
+    ViewBag.Title = "PDA | Edit User";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -19,7 +19,7 @@
 <div class="row main-content">
     <div class="col-sm-12">
         <div class="form-area">
-            <h3>Edit Module</h3>
+            <h3>Edit User</h3>
             @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditUser" }))
             {
                 @Html.AntiForgeryToken()

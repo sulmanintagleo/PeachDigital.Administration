@@ -1,7 +1,7 @@
 ﻿@model PeachDigital.Administration.Models.Role
 
 @{
-    ViewBag.Title = "PDA | Update Role";
+    ViewBag.Title = "PDA | Edit Role";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -20,7 +20,7 @@
 <div class="row main-content">
     <div class="col-sm-12">
         <div class="form-area">
-            <h3>Add Role</h3>
+            <h3>Edit Role</h3>
             @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "frmEditRole" }))
             {
                 @Html.AntiForgeryToken()
