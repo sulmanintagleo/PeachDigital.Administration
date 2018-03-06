@@ -43,6 +43,7 @@
                 <tbody></tbody>
             </table>
         </div>
+        <div id="NewPaginationContainer"></div>
     </div>
 </div>
 
@@ -80,6 +81,8 @@
             $(".table-responsive.tbl-pagination").find('*').removeClass("row");
             $("table").parent().removeAttr("class");
             $(".table-responsive.tbl-pagination").find('*').removeClass("col-sm-6");
+
+            $("#NewPaginationContainer").append($(".dataTables_paginate"));
 
         });
 

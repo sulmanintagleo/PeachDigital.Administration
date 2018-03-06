@@ -30,6 +30,8 @@
                     <p class="text-danger">@ViewBag.ErrorMessage</p>
                 }
 
+                @Html.HiddenFor(m => m.Id)
+
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="form-group">
@@ -144,7 +146,10 @@
                     </div>
 
                     <div class="col-sm-6">
-                        <input type="checkbox" id="PerformPayment" class="custom-checkbox" name="PerformPayment" />
+                        <input type="checkbox" id="PerformPayment" class="custom-checkbox" name="PerformPayment" value="true" @if (Model.PerformPayment) {
+                            @:checked="checked"
+                        } />
+
                         <label for="PerformPayment" class="">Perform Payment</label>
                     </div>
 
