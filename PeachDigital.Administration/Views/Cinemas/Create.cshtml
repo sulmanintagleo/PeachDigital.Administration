@@ -142,8 +142,8 @@
                             @Html.LabelFor(model => model.Public, htmlAttributes: new { @class = "" })
                             @*@Html.EditorFor(model => model.Public)*@
                             @Html.ValidationMessageFor(model => model.Public, "", new { @class = "text-danger" })
-                            <input type="checkbox" class="custom-checkbox" name="ThreeDSecure" id="ThreeDSecure" />
-                            <label class="">3D Secure</label>
+                            <input type="checkbox" class="custom-checkbox" name="ThreeDSecure" id="ThreeDSecure" value="true"/>
+                            <label for="ThreeDSecure">3D Secure</label>
                             @*@Html.EditorFor(model => model.ThreeDSecure)*@
                             @Html.ValidationMessageFor(model => model.ThreeDSecure, "", new { @class = "text-danger" })
                         </div>
@@ -152,11 +152,11 @@
                     <div class="col-sm-6">
                         <div class="form-group">
                             <input type="checkbox" class="custom-checkbox" name="IsPaymentWithGiftCardEnabled" id="IsPaymentWithGiftCardEnabled" />
-                            <label class="">Gift Card Payment Enabled</label>
+                            <label for="IsPaymentWithGiftCardEnabled">Gift Card Payment Enabled</label>
                             @*@Html.EditorFor(model => model.IsPaymentWithGiftCardEnabled)*@
                             @Html.ValidationMessageFor(model => model.IsPaymentWithGiftCardEnabled, "", new { @class = "text-danger" })
                             <input type="checkbox" class="custom-checkbox" name="IsLoyaltyEarnPointsEnabled" id="IsLoyaltyEarnPointsEnabled" />
-                            <label class="">Loyalty Earn Points Enabled</label>
+                            <label for="IsLoyaltyEarnPointsEnabled">Loyalty Earn Points Enabled</label>
                             @*@Html.EditorFor(model => model.IsLoyaltyEarnPointsEnabled)*@
                             @Html.ValidationMessageFor(model => model.IsLoyaltyEarnPointsEnabled, "", new { @class = "text-danger" })
                         </div>

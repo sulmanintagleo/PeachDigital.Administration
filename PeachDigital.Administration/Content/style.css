@@ -435,6 +435,7 @@ input:focus, select:focus {
 
             .main .content-area h2 a {
                 float: right;
+                margin-top: -8px;
             }
 
         .main .content-area .top-stats-widget .col-xs-4 {
@@ -978,19 +979,19 @@ form select {
     left: -9999px;
 }
 
-    .custom-checkbox[type="checkbox"]:not(:checked) + label,
-    .custom-checkbox[type="checkbox"]:checked + label {
-        position: relative;
-        padding-left: 35px;
-        padding-top: 5px;
-        color: #424a52;
-        cursor: pointer;
-        font-weight: normal;
-        text-transform: uppercase;
-        font-size: 12px;
-        margin-right: 20px;
-        margin-bottom: 15px;
-    }
+.custom-checkbox[type="checkbox"]:not(:checked) + label,
+.custom-checkbox[type="checkbox"]:checked + label {
+    position: relative;
+    padding-left: 35px;
+    padding-top: 5px;
+    color: #424a52;
+    cursor: pointer;
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 12px;
+    margin-right: 20px;
+    margin-bottom: 15px;
+}
 
 .edit-circuit .custom-checkbox[type="checkbox"]:not(:checked) + label,
 .edit-circuit .custom-checkbox[type="checkbox"]:checked + label {
@@ -1060,10 +1061,42 @@ form select {
     border: 2px solid #c3bfbf !important;
 }
 
+/*===========================================================================================================
+
+									CHECKBOX CSS ENDS HERE
+
+===========================================================================================================*/
 
 .checkbox-margin {
     margin-bottom: 0;
     margin-top: 40px;
+}
+
+
+/*.permissionModule {
+    border: 2px solid #eee;
+    padding: 15px;
+    border-radius: 15px;
+    margin-top:25px;
+}*/
+.permissionModule h4 {
+    text-transform: uppercase;
+    border-bottom: 2px solid #ff7b5f;
+    padding-bottom: 10px;
+     display: inline-block; 
+    margin-bottom: 25px;
+}
+
+.permission-btn {
+    text-align: center;
+    margin-top: 50px;
+}
+.permission-btn .btn {
+    max-width:130px;
+    margin-right:10px;
+}
+.permission-btn a {
+    line-height:28px;
 }
 
 /*===========================================================================================================
@@ -1141,6 +1174,9 @@ form select {
 
     .main {
         padding-bottom: 110px;
+    }
+    .main .content-area h2 {
+        font-size:28px;
     }
 }
 
@@ -1271,11 +1307,32 @@ form select {
 
     .main .content-area h2 {
         margin-bottom: 25px;
+        padding-left:0;
     }
 
-        .main .content-area h2 .search-input {
-            background: url(../images/down-arrow.png) no-repeat 96% 48% !important;
-        }
+    .main .content-area h2 .search-input {
+        background: url(../images/down-arrow.png) no-repeat 96% 48% !important;
+    }
+    
+}
+
+@media(max-width:620px) {
+    .main .content-area h2 .breadcrumb-nav {
+        float: none;
+        margin-top: 0;
+    }
+
+    .main .content-area h2 .breadcrumb-nav .breadcrumb {
+        padding: 0;
+    }
+    .breadcrumb-nav .breadcrumb {
+        margin: 10px 0 25px;
+        padding: 0;
+    }
+
+    .breadcrumb-nav .breadcrumb > li + li:before {
+        padding: 0;
+    }
 }
 
 @media(max-width:568px) {
@@ -1341,13 +1398,13 @@ form select {
     }
 
     .main .content-area h2 {
-        font-size: 28px;
-        line-height: 30px;
+        font-size: 24px;
+        line-height:32px;
     }
 
-        .main .content-area h2 .search-input {
-            background: url(../images/down-arrow.png) no-repeat 93% 48% !important;
-        }
+    .main .content-area h2 .search-input {
+        background: url(../images/down-arrow.png) no-repeat 93% 48% !important;
+    }
 
     .header .search {
         max-width: 125px;
@@ -1358,7 +1415,12 @@ form select {
         appearance: none;
         background: #f5f8fa url('../images/down-arrow.png') no-repeat 94% 50% !important;
     }
+    .main .content-area h2 a {
+        margin-top: 0;
+    }
 }
+
+
 
 @media(max-width:360px) {
     .navbar-toggle {
@@ -1378,6 +1440,17 @@ form select {
     .breadcrumb-nav .breadcrumb > li {
         font-size: 12px;
     }
+    .permission-btn .btn {
+        margin-right: 5px;
+    }
+    .main .content-area h2 {
+        font-size: 24px;
+    }
+    .main .content-area h2 span {
+        display: inline-block;
+        max-width: 140px;
+    }
+  
 }
 
 @media screen and (max-height: 880px) {
