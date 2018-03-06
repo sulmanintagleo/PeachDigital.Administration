@@ -183,17 +183,18 @@ namespace PeachDigital.Administration.Controllers
 
             int role = Convert.ToInt32(CryptoProvider.Decrypt(roleId));
 
+            List<ModulePermission> permission = db.ModulePermissions.Where(r => r.RoleId == role).ToList();
+            if (permission != null && permission.Count > 0)
+            {
+                db.ModulePermissions.RemoveRange(permission);
+                db.SaveChanges();
+            }
+
             if (!string.IsNullOrEmpty(permissions))
             {
                 string[] tmpPermissionsAry = permissions.Split(',');
                 if (tmpPermissionsAry.Count() > 0)
                 {
-                    List<ModulePermission> permission = db.ModulePermissions.Where(r => r.RoleId == role).ToList();
-                    if (permission != null && permission.Count > 0)
-                    {
-                        db.ModulePermissions.RemoveRange(permission);
-                        db.SaveChanges();
-                    }
                     foreach (var strPermission in tmpPermissionsAry)
                     {
                         string[] tempModulePermAry = strPermission.Split('-');
