@@ -66,7 +66,10 @@
             $('#tblCinemas').DataTable({
                 "proccessing": true,
                 "serverSide": true,
-                "bFilter":false,
+                "bFilter": false,
+                "oLanguage": {
+                    "sLengthMenu": "Records _MENU_",
+                },
                 "pagingType": "simple_numbers",
                 "sAjaxSource": "/Cinemas/GetCinemasByPaging/",
                 "columns": [
@@ -101,6 +104,9 @@
                         "proccessing": true,
                         "serverSide": true,
                         "bFilter": false,
+                        "oLanguage": {
+                            "sLengthMenu": "Records _MENU_",
+                        },
                         "pagingType": "simple_numbers",
                         "sAjaxSource": "/Cinemas/GetCinemasByPaging?circuitId=" + $("#Circuits").val(),
                         "columns": [
@@ -132,6 +138,9 @@
                         "proccessing": true,
                         "serverSide": true,
                         "bFilter": false,
+                        "oLanguage": {
+                            "sLengthMenu": "Records _MENU_",
+                        },
                         "pagingType": "simple_numbers",
                         "sAjaxSource": "/Cinemas/GetCinemasByPaging/",
                         "columns": [

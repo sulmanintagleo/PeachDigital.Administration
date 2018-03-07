@@ -73,10 +73,10 @@ namespace PeachDigital.Administration.Controllers
             if (ModelState.IsValid)
             {
                 //Duplication Check
-                var userExist = db.Users.Any(u => u.Email == user.Email || u.PhoneNo == user.PhoneNo);
+                var userExist = db.Users.Any(u => u.Email == user.Email);
                 if (userExist)
                 {
-                    ViewBag.ErrorMessage = "Please enter unique email and phone to register";
+                    ViewBag.ErrorMessage = "This email address has already been registered. Please try different one";
                     ViewBag.RoleId = new SelectList(db.Roles.Where(r => r.isActive), "Id", "Name", user.RoleId);
                     return View(user);
                 }
@@ -151,10 +151,10 @@ namespace PeachDigital.Administration.Controllers
             if (ModelState.IsValid)
             {
                 //Duplication Check
-                var userExist = db.Users.Any(u => (u.Email == user.Email || u.PhoneNo == user.PhoneNo) && u.Id != user.Id);
+                var userExist = db.Users.Any(u => (u.Email == user.Email) && u.Id != user.Id);
                 if (userExist)
                 {
-                    ViewBag.ErrorMessage = "Please enter unique email and phone to register";
+                    ViewBag.ErrorMessage = "This email address has already been registered. Please try different one";
                     ViewBag.RoleId = new SelectList(db.Roles.Where(r => r.isActive), "Id", "Name", user.RoleId);
                     return View(user);
                 }

@@ -4,7 +4,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>@ViewBag.RoleName Permissions</h2>
+<h2>@ViewBag.RoleName - Permissions</h2>
+
+<input type="checkbox" class="custom-checkbox" name="checkAll" id="checkAll" />
+<label id="lblCheckAll" for="checkAll">Check All</label>
+
 <hr />
 <div class="row">
     @using (Html.BeginForm())
@@ -63,28 +67,35 @@
 
     <script type="text/javascript">
 
-            $(document).ready(function () {
+        $(document).ready(function () {
 
-                $("#btnUpdatePermissions").click(function () {
-                    var strModulePerAry = $('[data-modulePerm]:checked').map(function () { return $(this).attr("data-modulePerm") }).get().join(',');
-                    //console.log(strModulePerAry);
+            $('#checkAll').change(function () {
+                if ($("#checkAll").is(':checked')) {
+                    $('input[name=permission]:checkbox').prop('checked', true);
+                }
+                else {
+                    $('input[name=permission]:checkbox').prop('checked', false);
+                }
+            });
 
-                    $.ajax({
-                        url: "/Roles/UpdatePermissions/",
-                        type: "post",
-                        data: { roleId: $("#RoleId").val(), permissions: strModulePerAry},
-                        success: function (response) {
-                            if (response.success) {
-                                alert(response.message);
-                                window.location.href = "/Roles";
-                            }
-                        },
-                        error: function () {
-                            alert("Access denied, Please contact to admin to get access.");
+            $("#btnUpdatePermissions").click(function () {
+                var strModulePerAry = $('[data-modulePerm]:checked').map(function () { return $(this).attr("data-modulePerm") }).get().join(',');
+                $.ajax({
+                    url: "/Roles/UpdatePermissions/",
+                    type: "post",
+                    data: { roleId: $("#RoleId").val(), permissions: strModulePerAry},
+                    success: function (response) {
+                        if (response.success) {
+                            alert(response.message);
+                            window.location.href = "/Roles";
                         }
-                    });
+                    },
+                    error: function () {
+                        alert("Access denied, Please contact to admin to get access.");
+                    }
                 });
             });
+        });
 
     </script>
 
